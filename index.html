@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- Core -->
+    <script src="plugins/animationpolyfill.js"></script>
+    <script src="core/physx/particles/particle.js"></script>
+    <script src="core/physx/particles/damper.js"></script>
+    <script src="core/physx/particles/simulation.js"></script>
+    <script src="core/physx/particles/emitter.js"></script>
+    <script src="core/physx/particles/render.js"></script>
+    <script src="core/physx/particles/renderconfig.js"></script>
+    <script src="core/physx/particles/render.js"></script>
+    <script src="core/physx/particles/vector.js"></script>
+    <script src="demos/demo.js"></script>
+    <script>
+        var L        = window.LibreJs = window.LibreJs || {};
+        var Plugins  = L.Plugins      = L.Plugins      || {};
+        var Physx  = Plugins.Physx = Plugins.Physx || {};
+        var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
+    </script>
+    <title>Particles</title>
+    <style>
+        canvas {
+            background-color: rgba(200,200,200,.25);
+        }
+    </style>
+</head>
+<body>
+<canvas id="demo" width="600" height="300"></canvas>
+<script>
+(function(window) {
+    var canvas, ctx, particle, particles, bounds, simulation,render, damper, emitter,emitter2;
+    canvas = window.document.getElementById("demo");
+    ctx = canvas.getContext("2d");
+    particle = new Particles.Particle(
+            new Particles.Vector(0,150),
+            new Particles.Vector(2,0),
+            new Particles.Vector(0,0)
+    );
+    damper = new Particles.Damper(new Particles.Vector(300,150),-200);
+    particles = [particle];
+    bounds = new Particles.Vector(canvas.width,canvas.height);
+    //simulation = new Particles.Simulation(particles, [],bounds);
+    simulation = new Particles.Simulation(particles, [damper],bounds);
+    render = new Particles.Render(canvas,simulation);
+
+    emitter = new Particles.Emitter(
+            new Particles.Vector(10,150),
+            new Particles.Vector(2,5),
+            Math.PI,
+            1000,
+            10
+    );
+    //emitter2 = new Particles.Emitter(new Particles.Vector(590,150),new Particles.Vector(-2,0));
+    simulation.attachEmitter(emitter);
+    //simulation.attachEmitter(emitter2);
+
+    function getPosition(event)
+    {
+        var x = new Number();
+        var y = new Number();
+        var canvas = document.getElementById("demo");
+
+        if (event.x != undefined && event.y != undefined)
+        {
+            x = event.x;
+            y = event.y;
+        }
+        else // Firefox method to get the position
+        {
+            x = event.clientX + document.body.scrollLeft +
+            document.documentElement.scrollLeft;
+            y = canvas.height-event.clientY;
+
+        }
+
+        x -= canvas.offsetLeft;
+        return {
+            x:x,
+            y:y
+        };
+
+    }
+
+    canvas.addEventListener('mousemove',function(evt){
+        var p = getPosition(evt);
+        simulation.emitters[0].move(new Particles.Vector(p.x, p.y));
+    });
+    /*
+    var lastPaintCount = window.mozPaintCount;
+    setInterval( function(){
+        console.log( window.mozPaintCount - lastPaintCount );
+        lastPaintCount = window.mozPaintCount;
+    }, 1000);
+    */
+    var loop = function(timestamp){
+        //particle.move();
+        //particle.draw(ctx);
+        simulation.step(timestamp);
+        console.log(simulation.getMaxParticles());
+        render.draw();
+        //damper.draw(ctx);
+        requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+})(window);
+</script>
+
+</body>
+</html>
