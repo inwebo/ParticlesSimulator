@@ -36,6 +36,11 @@
                 var particle = plugin.simulation.particles[i];
                 particle.draw(plugin.ctx);
             };
+            var l = plugin.simulation.dampers.length;
+            for(var i = 0 ; i < l ; i++) {
+                var damper = plugin.simulation.dampers[i];
+                damper.draw(plugin.ctx);
+            };
         };
 
         init(canvas,simulation);
