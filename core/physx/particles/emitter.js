@@ -6,13 +6,14 @@
     var Physx  = Plugins.Physx = Plugins.Physx || {};
     var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
 
-    Particles.Emitter = function(point, velocity, spread, maxParticles, emitRate){
-        var plugin              = this;
+    Particles.Emitter = function(point, velocity, spread, maxParticles, rate, life){
+        var plugin = this;
         plugin.position = point;
         plugin.velocity = velocity;
         plugin.spread = spread || Math.PI / 32;
         plugin.maxParticles = maxParticles || 100;
-        plugin.emittRate = emitRate || 5;
+        plugin.rate = rate || 5;
+        plugin.particleLife = life || -1;
 
         plugin.move = function(point){
             plugin.position = point;
@@ -24,7 +25,10 @@
             var position = new Particles.Vector(plugin.position.x, plugin.position.y);
             var t = new Particles.Vector();
             var velocity = t.fromAngle(angle, magnitude);
-            return new Particles.Particle(position,velocity);
+
+            var life = (plugin.particleLife !== -1) ? Math.floor((Math.random() * 100) + 1) * 10 * plugin.particleLife : -1;
+
+            return new Particles.Particle(position,velocity,null,life);
         };
 
     };
