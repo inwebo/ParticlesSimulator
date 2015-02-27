@@ -11,6 +11,10 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
     var ctx     = canvas.getContext("2d");
 
     var Demo = {
+        fps:60,
+        getFrameInterval : function(fps){
+            return Math.floor(1000 / fps);
+        },
         form:document.getElementById("settings-inputs").reset(),
         canvas : canvas,
         ctx : ctx,
@@ -36,9 +40,9 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
 
     var bounds      = new Particles.Vector(Demo.canvas.width,Demo.canvas.height);
     var damper      = new Particles.Damper(new Particles.Vector(300,150),-200);
-    var simulation  = new Particles.Simulation([], [damper],bounds);
-    var render      = new Particles.Render(Demo.canvas,simulation);
-
+    var simulation  = new Particles.Simulation([], [damper], bounds);
+    var render      = new Particles.Render(Demo.canvas, simulation, null, Demo.getFrameInterval());
+    //render.attachParticleSprite("./sprites/heart.svg");
     var emitter     = new Particles.Emitter(
         // Point
         new Particles.Vector(300,0),
@@ -47,35 +51,41 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
         // Spay angle
         Math.PI/32,
         // Max particles
-        500,//damper.draw(Demo.ctx);
+        100,
         // Particles per seconds
-        1,
+        10 ,
         // Particles life s
-        5
+        -1
     );
+
 
     var emitter2     = new Particles.Emitter(
         // Point
-        new Particles.Vector(-1,-1),
+        new Particles.Vector(150,150),
         // Velocity
         new Particles.Vector(0,2),
         // Spay angle
         Math.PI,
         // Max particles
-        500,
+        10000,
         // Particles per seconds
-        1,
+        10,
         // Particles life s
-        5
+        5,
+        60
     );
 
     simulation.attachEmitter(emitter);
-    simulation.attachEmitter(emitter2);
+    //simulation.attachEmitter(emitter2);
 
     //region Events
+
     Demo.canvas.addEventListener('mousemove',function(evt){
-        var p = getPosition(evt);
-        simulation.emitters[1].move(new Particles.Vector(p.x, p.y));
+        if(simulation.emitters[1]!== undefined) {
+            var p = getPosition(evt);
+            simulation.emitters[1].move(new Particles.Vector(p.x, p.y));
+        }
+
     });
 
     /**
@@ -121,18 +131,53 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
     /**
      * Main draw function
      */
-    var sprite = new Image();
-    sprite.src="./sprites/heart.svg";
     var draw = function(timestamp) {
         setTimeout(function() {
-
             requestAnimationFrame(draw);
             simulation.step(timestamp);
             render.draw();
-            Demo.ctx.drawImage(sprite,40,40);
-        },1000/60);
+        },Demo.getFrameInterval(Demo.fps));
     };
-    draw();
+    requestAnimationFrame(draw);
+
+    var foo = function(){
+        var  plugin = this;
+        this.bar = "Hello";
+
+        this.draw = function(callback){
+            var c;
+            if(callback === undefined) {
+                c = this.defaultCallback;
+                return c.call(plugin);
+            }
+            else {
+                c = callback;
+            }
+
+            var args = Array.prototype.slice.call(arguments, 1);
+//            console.log(args);
+
+            return c.call(plugin,args);
+
+        };
+
+        this.defaultCallback = function(){
+            return plugin.bar + " world";
+        };
+
+    };
+
+    var foo = new foo();
+    var d = foo.draw();
+    //console.log(d);
+
+    var callback = function(args){
+        var plugin = this;
+        return plugin.bar +  " " + args[0] + " " + args[1];
+    };
+    var d = foo.draw(callback," le ", " monde ");
+    console.log(d);
+
 })(window);
 
 function getPosition(event)
