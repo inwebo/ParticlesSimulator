@@ -46,55 +46,8 @@
     </fieldset>
 
 </form>
-<script>
-(function(window) {
-/*
-    var canvas, ctx, particle, particles, bounds, simulation,render, damper, emitter,emitter2;
-    canvas = window.document.getElementById("demo");
-    ctx = canvas.getContext("2d");
 
-    damper = new Particles.Damper(new Particles.Vector(300,150),-200);
-
-    bounds = new Particles.Vector(canvas.width,canvas.height);
-
-    simulation = new Particles.Simulation([], [damper],bounds);
-    render = new Particles.Render(canvas,simulation);
-
-    emitter = new Particles.Emitter(
-            new Particles.Vector(300,0),
-            new Particles.Vector(0,2),
-            Math.PI/32,
-
-            500,
-
-            1
-    );
-
-
-
-    emitter2 = new Particles.Emitter(new Particles.Vector(590,150),new Particles.Vector(-2,0));
-    simulation.attachEmitter(emitter);
-    simulation.attachEmitter(emitter2);
-
-
-    canvas.addEventListener('mousemove',function(evt){
-        var p = getPosition(evt);
-        simulation.emitters[0].move(new Particles.Vector(p.x, p.y));
-    });
-
-
-    var draw = function(timestamp) {
-        setTimeout(function() {
-            requestAnimationFrame(draw);
-            simulation.step(timestamp);
-            render.draw();
-            damper.draw(ctx);
-        },1000/60);
-    };
-    //draw();
-*/
-})(window);
-</script>
 <script src="demos/demo.js"></script>
+
 </body>
 </html>
