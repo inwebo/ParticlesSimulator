@@ -30,6 +30,11 @@
             return new Particles.Vector(magnitude*Math.cos(angle), magnitude * Math.sin(angle));
         };
 
+        plugin.reset = function(){
+            plugin.x = 0;
+            plugin.y = 0;
+        };
+
     };
 })(window);
 //]]>
