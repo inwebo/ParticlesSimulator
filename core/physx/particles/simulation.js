@@ -7,12 +7,12 @@
 
     Particles.Simulation = function(particles, dampers, bounds){
         var plugin          = this;
-        plugin.bounds          = null;
+        plugin.bounds       = null;
         plugin.particles    = particles || [];
-        plugin.dampers      = dampers ||[];
-        plugin.emitters      = [];
+        plugin.dampers      = dampers   || [];
+        plugin.emitters     = [];
         plugin.maxParticles = 0;
-        plugin.tick = Date.now();
+        plugin.timestamp        = 0;
 
         var init = function(particles,dampers,bounds){
             plugin.particles = particles;
@@ -21,9 +21,41 @@
             plugin.maxParticles = plugin.getMaxParticles();
         };
 
+        plugin.getEmittersMaxParticles = function(){
+            return Math.ceil( plugin.maxParticles / plugin.emitters.length );
+        };
+
         plugin.step = function(timestamp){
+            if( plugin.getTicks(timestamp) > plugin.timestamp ) {
+                plugin.timestamp++;
+            }
             plugin.cleanParticles();
-            plugin.newParticles();
+
+            // For each emitters
+            var l = plugin.emitters.length ;
+
+            for(var i=0; i<l ; i++) {
+                var emitter = plugin.emitters[i];
+                emitter.step(timestamp);
+                if( emitter.isTicking() ) {
+                    //var l = emitter.getParticlesByTick();
+
+                    if( emitter.isQueued() ) {
+                        var l = emitter.getParticlesByFrame();
+                        for(var i=0; i < l;i++) {
+                            plugin.newParticles();
+                        }
+                    }
+                    else {
+                        plugin.newParticles();
+                    }
+
+                    emitter.resetInterval();
+                }
+                emitter.setTimestamp(timestamp);
+            };
+
+            // Damp each particles
             var l = plugin.particles.length;
             for(var i = 0 ; i < l ; i++) {
                 // Fields
@@ -31,8 +63,14 @@
                 for( var n = 0; n < m; n++ ) {
                     plugin.particles[i].damp(plugin.dampers[n]);
                 };
+                plugin.particles[i].step(timestamp)
                 plugin.particles[i].move();
             };
+        };
+
+        plugin.getTicks = function(timestamp){
+            var date = new Date(timestamp);
+            return date.getSeconds() + (date.getMinutes() * 60) + (date.getMinutes() * 3600 );
         };
 
         plugin.cleanParticles = function(){
@@ -49,11 +87,8 @@
                         if(plugin.particles[i].death > Date.now() === true) {
                             buffer.push(plugin.particles[i]);
                         }
-
                     }
-
                 }
-
             };
             plugin.particles = buffer;
 
@@ -71,7 +106,6 @@
 
         plugin.getMaxParticles = function() {
             var l = plugin.emitters.length ;
-
             var t = 0;
             for(var i = 0; i<l ; i++){
                 t += plugin.emitters[i].maxParticles;
@@ -91,17 +125,12 @@
 
         plugin.newParticles = function(){
             var l = plugin.emitters.length ;
-            var max = plugin.getMaxParticles();
-
             // For each emitters
-            for(var i = 0; i<l ; i++){
-                // Emit rate
-                for(var j=0; j <plugin.emitters[i].rate;j++) {
-                    // Max particles reached
-                    if(plugin.particles.length < max) {
-                        plugin.particles.push(plugin.emitters[i].emitParticle());
-                    }
-                };
+            for(var i = 0; i < l ; i++){
+                // Max particles reached
+                if(plugin.particles.length < plugin.maxParticles) {
+                    plugin.particles.push(plugin.emitters[i].emit());
+                }
             };
         };
 
