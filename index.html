@@ -3,7 +3,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <!-- Core -->
+    <script src="core/physx/particles/header.js"></script>
     <script src="plugins/animationpolyfill.js"></script>
+    <script src="core/physx/particles/vector.js"></script>
     <script src="core/physx/particles/particle.js"></script>
     <script src="core/physx/particles/damper.js"></script>
     <script src="core/physx/particles/simulation.js"></script>
@@ -11,14 +13,7 @@
     <script src="core/physx/particles/render.js"></script>
     <script src="core/physx/particles/renderconfig.js"></script>
     <script src="core/physx/particles/render.js"></script>
-    <script src="core/physx/particles/vector.js"></script>
 
-    <script>
-        var L        = window.LibreJs = window.LibreJs || {};
-        var Plugins  = L.Plugins      = L.Plugins      || {};
-        var Physx  = Plugins.Physx = Plugins.Physx || {};
-        var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
-    </script>
     <title>Particles</title>
     <style>
         canvas {
@@ -43,11 +38,15 @@
     <fieldset>
         <legend>Emitter</legend>
         <label>Max particules<input id="emitter-max" type="range" min="1" max="2000" step="1" value="500">2000<span id="emitter-max-value"></span></label><br>
+        <label>Particles per seconds<input id="emitter-pps" type="range" min="1" max="1000" step="1" value="500">1000<span id="emitter-pps-value"></span></label><br>
     </fieldset>
 
 </form>
 
 <script src="demos/demo.js"></script>
 
+<script>
+
+</script>
 </body>
 </html>
