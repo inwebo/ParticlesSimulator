@@ -1,11 +1,13 @@
-var L        = window.LibreJs = window.LibreJs || {};
-var Plugins  = L.Plugins      = L.Plugins      || {};
-var Physx  = Plugins.Physx = Plugins.Physx || {};
-var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
-
-
-
+//console.profile("Hop");
+//<![CDATA[
 (function(window) {
+
+    var Vector      = window.LibreJs.Plugins.Physx.Particles.Vector.prototype.constructor;
+    var Simulation  = window.LibreJs.Plugins.Physx.Particles.Simulation.prototype.constructor;
+    var Damper      = window.LibreJs.Plugins.Physx.Particles.Damper.prototype.constructor;
+    var Emitter     = window.LibreJs.Plugins.Physx.Particles.Emitter.prototype.constructor;
+    var Render      = window.LibreJs.Plugins.Physx.Particles.Render.prototype.constructor;
+
 
     var canvas = window.document.getElementById("demo");
     var ctx     = canvas.getContext("2d");
@@ -34,36 +36,38 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
         },
         emitter : {
             max: window.document.getElementById("emitter-max"),
-            maxValue: window.document.getElementById("emitter-max-value")
+            maxValue: window.document.getElementById("emitter-max-value"),
+            pps: window.document.getElementById("emitter-pps"),
+            ppsValue: window.document.getElementById("emitter-pps-value")
         }
     };
 
-    var bounds      = new Particles.Vector(Demo.canvas.width,Demo.canvas.height);
-    var damper      = new Particles.Damper(new Particles.Vector(300,150),-200);
-    var simulation  = new Particles.Simulation([], [damper], bounds);
-    var render      = new Particles.Render(Demo.canvas, simulation, null, Demo.getFrameInterval());
+    var bounds      = new Vector(Demo.canvas.width,Demo.canvas.height);
+    var damper      = new Damper(new Vector(300,150),-200);
+    var simulation  = new Simulation([], [damper], bounds);
+    var render      = new Render(Demo.canvas, simulation, null, Demo.getFrameInterval());
     //render.attachParticleSprite("./sprites/heart.svg");
-    var emitter     = new Particles.Emitter(
+    var emitter     = new Emitter(
         // Point
-        new Particles.Vector(300,0),
+        new Vector(300,0),
         // Velocity
-        new Particles.Vector(0,2),
+        new Vector(0,2),
         // Spay angle
-        Math.PI/32,
+        Math.PI/16,
         // Max particles
-        100,
+        1,
         // Particles per seconds
-        10 ,
+        1 ,
         // Particles life s
-        -1
+        5
     );
 
 
-    var emitter2     = new Particles.Emitter(
+    var emitter2     = new Emitter(
         // Point
-        new Particles.Vector(150,150),
+        new Vector(150,150),
         // Velocity
-        new Particles.Vector(0,2),
+        new Vector(0,2),
         // Spay angle
         Math.PI,
         // Max particles
@@ -102,14 +106,21 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
      */
     Demo.emitter.maxValue.innerHTML = '[500]';
     Demo.emitter.max.addEventListener('input',function(evt){
-        simulation.emitters[0].maxParticles = Demo.emitter.max.value;
+        simulation.maxParticles = Demo.emitter.max.value;
         Demo.emitter.maxValue.innerHTML  = '['+Demo.emitter.max.value+']';
     });
+
+    Demo.emitter.ppsValue.innerHTML = '[500]';
+    Demo.emitter.pps.addEventListener('input',function(evt){
+        simulation.emitters[0].pps = Demo.emitter.pps.value;
+        Demo.emitter.ppsValue.innerHTML  = '['+Demo.emitter.pps.value+']';
+    });
+
     Demo.damper.x.addEventListener('input',function(evt){
-        simulation.dampers[0].point.x = Demo.damper.x.value;
+        simulation.dampers[0].position.x = Demo.damper.x.value;
     });
     Demo.damper.y.addEventListener('input',function(evt){
-        simulation.dampers[0].point.y = Demo.damper.y.value;
+        simulation.dampers[0].position.y = Demo.damper.y.value;
     });
 
     /**
@@ -121,16 +132,13 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
         Demo.damper.massValue.innerHTML  = '['+Demo.damper.mass.value+']';
     });
     Demo.damper.x.addEventListener('input',function(evt){
-        simulation.dampers[0].point.x = Demo.damper.x.value;
+        simulation.dampers[0].position.x = Demo.damper.x.value;
     });
     Demo.damper.y.addEventListener('input',function(evt){
-        simulation.dampers[0].point.y = Demo.damper.y.value;
+        simulation.dampers[0].position.y = Demo.damper.y.value;
     });
     //endregion
-
-    /**
-     * Main draw function
-     */
+    //region Draw()
     var draw = function(timestamp) {
         setTimeout(function() {
             requestAnimationFrame(draw);
@@ -139,6 +147,7 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
         },Demo.getFrameInterval(Demo.fps));
     };
     requestAnimationFrame(draw);
+    //endregion
 
     var foo = function(){
         var  plugin = this;
@@ -176,7 +185,12 @@ var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
         return plugin.bar +  " " + args[0] + " " + args[1];
     };
     var d = foo.draw(callback," le ", " monde ");
-    console.log(d);
+    //console.log(d);
+    var f = function(){setTimeout(function() {
+        //console.profileEnd();
+    }, 2000)};
+    f();
+
 
 })(window);
 
@@ -208,3 +222,4 @@ function getPosition(event)
 
 }
 
+//]]>
