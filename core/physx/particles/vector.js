@@ -1,15 +1,15 @@
 //<![CDATA[
 ;(function(window){
-
-    var L        = window.LibreJs = window.LibreJs || {};
-    var Plugins  = L.Plugins      = L.Plugins      || {};
-    var Physx  = Plugins.Physx = Plugins.Physx || {};
-    var Particles  = Plugins.Physx.Particles = Plugins.Physx.Particles   || {};
-
-    Particles.Vector = function(x, y){
-        var plugin              = this;
-        plugin.x = x || 0;
-        plugin.y = y || 0;
+    /**
+     * Simulation's base Object
+     * @param x
+     * @param y
+     * @constructor
+     */
+    window.LibreJs.Plugins.Physx.Particles.Vector = function(x, y){
+        var plugin  = this;
+        plugin.x    = x || 0;
+        plugin.y    = y || 0;
 
         plugin.add = function(vector){
             //if( vector instanceof Particles.Vector) {
@@ -26,15 +26,23 @@
             return Math.atan2(plugin.y, plugin.x);
         };
 
-        plugin.fromAngle = function(angle, magnitude){
-            return new Particles.Vector(magnitude*Math.cos(angle), magnitude * Math.sin(angle));
-        };
-
         plugin.reset = function(){
             plugin.x = 0;
             plugin.y = 0;
         };
 
     };
+
+    var Vector = window.LibreJs.Plugins.Physx.Particles.Vector.prototype.constructor;
+    /**
+     * Static public
+     * @param angle
+     * @param magnitude
+     * @returns {window.LibreJs.Plugins.Physx.Particles.Vector}
+     */
+    window.LibreJs.Plugins.Physx.Particles.Vector.prototype.fromAngle =  function(angle, magnitude){
+        return new Vector( magnitude * Math.cos(angle), magnitude * Math.sin(angle));
+    };
+
 })(window);
 //]]>

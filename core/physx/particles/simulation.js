@@ -12,7 +12,7 @@
         plugin.dampers      = dampers   || [];
         plugin.emitters     = [];
         plugin.maxParticles = 0;
-        plugin.timestamp        = 0;
+        plugin.timestamp    = 0;
 
         var init = function(particles,dampers,bounds){
             plugin.particles = particles;
@@ -40,14 +40,14 @@
                 if( emitter.isTicking() ) {
                     //var l = emitter.getParticlesByTick();
 
-                    if( emitter.isQueued() ) {
+                    if( emitter.emitMultipleParticlesByTick() ) {
                         var l = emitter.getParticlesByFrame();
                         for(var i=0; i < l;i++) {
-                            plugin.newParticles();
+                            plugin.particleFactory();
                         }
                     }
                     else {
-                        plugin.newParticles();
+                        plugin.particleFactory();
                     }
 
                     emitter.resetInterval();
@@ -63,7 +63,7 @@
                 for( var n = 0; n < m; n++ ) {
                     plugin.particles[i].damp(plugin.dampers[n]);
                 };
-                plugin.particles[i].step(timestamp)
+                plugin.particles[i].step(timestamp);
                 plugin.particles[i].move();
             };
         };
@@ -95,10 +95,10 @@
         };
 
         plugin.isInside = function(particle) {
-            if( particle.point.x < 0 || particle.point.y < 0) {
+            if( particle.position.x < 0 || particle.position.y < 0) {
                 return false;
             }
-            if( particle.point.x > plugin.bounds.x || particle.point.y > plugin.bounds.y) {
+            if( particle.position.x > plugin.bounds.x || particle.position.y > plugin.bounds.y) {
                 return false;
             }
             return true;
@@ -123,13 +123,13 @@
             plugin.maxParticles = plugin.getMaxParticles();
         };
 
-        plugin.newParticles = function(){
+        plugin.particleFactory = function(){
             var l = plugin.emitters.length ;
             // For each emitters
             for(var i = 0; i < l ; i++){
                 // Max particles reached
                 if(plugin.particles.length < plugin.maxParticles) {
-                    plugin.particles.push(plugin.emitters[i].emit());
+                    plugin.particles.push(plugin.emitters[i].particleFactory());
                 }
             };
         };
