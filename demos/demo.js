@@ -7,11 +7,32 @@
     var Damper      = window.LibreJs.Plugins.Physx.Particles.Damper.prototype.constructor;
     var Emitter     = window.LibreJs.Plugins.Physx.Particles.Emitter.prototype.constructor;
     var Render      = window.LibreJs.Plugins.Physx.Particles.Render.prototype.constructor;
+    var Particle    = window.LibreJs.Plugins.Physx.Particles.Particle.prototype.constructor;
+    var Ticker      = window.LibreJs.Plugins.Ticker.prototype.constructor;
+    var TailConfig  = window.LibreJs.Plugins.Physx.Particles.Tail.prototype.constructor;
+    var Simulation  = window.LibreJs.Plugins.Physx.Particles.Simulation.prototype.constructor;
+    var Bounds  = window.LibreJs.Plugins.Physx.Particles.Bounds.prototype.constructor;
 
+    var bounds = new Bounds(0,600,0,300);
+    //var i = bounds.isInbounds(1000,10);
+    //console.log(i);
+
+    //var ticker = new Ticker(1000);
 
     var canvas = window.document.getElementById("demo");
-    var ctx     = canvas.getContext("2d");
+    var ctx    = canvas.getContext("2d");
+/*
+    var gradient = ctx.createLinearGradient(400,0,300,0);
 
+    gradient.addColorStop(0,"rgba(0,0,0,1)");
+    gradient.addColorStop(1,"rgba(0,0,0,0)");
+
+    ctx.beginPath();
+    ctx.moveTo(300,150);
+    ctx.lineTo(400,150);
+    ctx.strokeStyle = gradient;
+    ctx.stroke();
+*/
     var Demo = {
         fps:60,
         getFrameInterval : function(fps){
@@ -42,9 +63,27 @@
         }
     };
 
-    var bounds      = new Vector(Demo.canvas.width,Demo.canvas.height);
+    var particle = new Particle(
+        new Vector(0,0),
+        new Vector(2,0.5),
+        new Vector(0,0),
+        -1
+    );
+
+    var tailConfig = new TailConfig(
+        100,
+        10
+    );
+    particle.attachTailConfig(tailConfig);
+
+    //var bounds      = new Vector(Demo.canvas.width,Demo.canvas.height);
     var damper      = new Damper(new Vector(300,150),-200);
-    var simulation  = new Simulation([], [damper], bounds);
+    var simulation  = new Simulation(bounds);
+
+    simulation.attachDamper(damper);
+    //simulation.attachParticle(particle);
+
+
     var render      = new Render(Demo.canvas, simulation, null, Demo.getFrameInterval());
     //render.attachParticleSprite("./sprites/heart.svg");
     var emitter     = new Emitter(
@@ -55,9 +94,9 @@
         // Spay angle
         Math.PI/16,
         // Max particles
-        1,
+        500,
         // Particles per seconds
-        1 ,
+        50 ,
         // Particles life s
         5
     );
@@ -71,9 +110,9 @@
         // Spay angle
         Math.PI,
         // Max particles
-        10000,
+        1,
         // Particles per seconds
-        10,
+        1,
         // Particles life s
         5,
         60
@@ -138,12 +177,17 @@
         simulation.dampers[0].position.y = Demo.damper.y.value;
     });
     //endregion
+
+
     //region Draw()
     var draw = function(timestamp) {
         setTimeout(function() {
-            requestAnimationFrame(draw);
             simulation.step(timestamp);
             render.draw();
+            requestAnimationFrame(draw);
+
+            //ticker.step(timestamp);
+
         },Demo.getFrameInterval(Demo.fps));
     };
     requestAnimationFrame(draw);
