@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- Core -->
+    <script src="core/physx/particles/header.js"></script>
+    <script src="plugins/animationpolyfill.js"></script>
+    <script src="plugins/assert.js"></script>
+    <script src="core/ticker/ticker.js"></script>
+    <script src="core/physx/particles/vector/vector.js"></script>
+    <script src="core/physx/particles/particle/particle.js"></script>
+    <script src="core/physx/particles/particle/tail/tail.js"></script>
+    <script src="core/physx/particles/damper/damper.js"></script>
+    <script src="core/physx/particles/simulation/bounds.js"></script>
+    <script src="core/physx/particles/simulation/simulation.js"></script>
+    <script src="core/physx/particles/emitter/emitter.js"></script>
+    <script src="core/physx/particles/render/render.js"></script>
+    <script src="core/physx/particles/render/renderconfig.js"></script>
+    <script src="core/physx/particles/render/render.js"></script>
+
+    <title>Particles tests</title>
+    <style>
+        canvas {
+            background-color: rgba(200,200,200,.25);
+        }
+    </style>
+</head>
+<body>
+<canvas id="demo" width="600" height="300"></canvas>
+<script src="tests/vector.js"></script>
+<script src="tests/particle.js"></script>
+<script src="tests/bounds.js"></script>
+<script src="tests/tail.js"></script>
+<script src="tests/emitter.js"></script>
+<script src="tests/simulation.js"></script>
+
+</body>
+</html>
