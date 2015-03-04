@@ -5,15 +5,6 @@
         plugin.position     = position || new Vector(0,0);
         plugin.mass         = mass || 5;
 
-        /*
-        plugin.draw = function(ctx){
-            ctx.beginPath();
-            ctx.arc(plugin.position.x, plugin.position.y, 2, 0, 2 * Math.PI, false);
-            ctx.fillStyle = "red";
-            ctx.fill();
-        };
-        */
-
         plugin.getDistance = function(particle){
             //var x = plugin.position.x - particle.position.x;
             //var y = plugin.position.y - particle.position.y;
