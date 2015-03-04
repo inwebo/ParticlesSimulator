@@ -31,7 +31,6 @@
     <fieldset>
         <legend>Particle</legend>
         <label>Life (s), (eternal) 0<input id="particle-life" type="range" min="0" max="10" step="1" value="5">10<span id="particle-life-value"></span></label><br>
-
     </fieldset>
     <fieldset>
         <legend>Field</legend>
@@ -43,6 +42,10 @@
         <legend>Emitter</legend>
         <label>Max particules<input id="emitter-max" type="range" min="1" max="2000" step="1" value="500">2000<span id="emitter-max-value"></span></label><br>
         <label>Particles per seconds<input id="emitter-pps" type="range" min="1" max="1000" step="1" value="500">1000<span id="emitter-pps-value"></span></label><br>
+    </fieldset>
+    <fieldset>
+        <legend>Tail <input id="tail" type="checkbox" checked="true"></legend>
+        <label>Size<input id="tail-size" type="input" value="25"></label><br>
     </fieldset>
 
 </form>
