@@ -18,7 +18,7 @@
      * @param int fps Frames Per Seconds of animation, default 60
      * @constructor
      */
-    window.LibreJs.Plugins.Physx.Particles.Emitter = function(point, velocity, spread, maxParticles, pps, life, fps){
+    window.LibreJs.Plugins.Physx.Particles.Emitter = function(point, velocity, spread, maxParticles, pps, life, fps, tailConfig){
         var plugin = this;
         plugin.position     = point;
         plugin.velocity     = velocity;
@@ -28,6 +28,7 @@
         plugin.particleLife = life || -1;
         plugin.fps          = fps || 60;
         plugin.ticker       = null;
+        plugin.tailConfig   = tailConfig || null;
 
         var init = function(){
             plugin.ticker = new Ticker(plugin.getEmitInterval());
@@ -60,12 +61,16 @@
          * @param ms
          * @returns {number}
          */
+        /*@todo
         plugin.getParticlesByDuration = function(ms){
             var ms = (ms / 1000);
-            var frames = Math.floor(ms / plugin.getFrameDuration());
+            if( ms === 1 ) {
+                return ms;
+            }
+            var frames = Math.ceil(ms / plugin.getFrameDuration());
             return frames * plugin.getParticlesByFrame();
         };
-
+        */
         /**
          * Emit multiple particles for each tick ?
          * @returns {boolean}
@@ -90,11 +95,13 @@
             var velocity = fromAngle(angle, magnitude);
             var life = (plugin.particleLife !== -1) ? Math.floor((Math.random() * 100) + 1) * 10 * plugin.particleLife : -1;
             var particle = new Particle(position,velocity,null,life);
-            var tailConfig = new TailConfig(
-                25,
-                33
-            );
-            particle.attachTailConfig(tailConfig);
+            if( plugin.tailConfig !== null ) {
+                var tailConfig = new TailConfig(
+                    plugin.tailConfig.size,
+                    plugin.tailConfig.captureInterval
+                );
+                particle.attachTailConfig(tailConfig);
+            }
             return particle;
         };
 

@@ -2,9 +2,9 @@
 ;(function(window){
     window.LibreJs.Plugins.Physx.Particles.Render = function(canvas, simulation){
         var plugin = this;
-        plugin.canvas;
-        plugin.ctx;
-        plugin.simulation;
+        plugin.canvas       = null;
+        plugin.ctx          = null;
+        plugin.simulation   = null;
 
         //region Helpers
         var init = function(canvas, simulation){
@@ -63,7 +63,7 @@
                 var particle = plugin.simulation.particles[i];
                 plugin.defaultParticle(particle);
 
-                if( particle.isTailed() /*&& particle.tail.particles.length > 0*/ ) {
+                if( particle.isTailed() && !particle.tail.isEmpty() ) {
                     var alpha = Math.floor(particle.getLived())/100;
                     plugin.ctx.save();
                     plugin.ctx.beginPath();
@@ -77,7 +77,7 @@
                     plugin.ctx.stroke();
                     plugin.ctx.restore();
                 }
-            };
+            }
         };
 
 
