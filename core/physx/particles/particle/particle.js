@@ -32,7 +32,13 @@
             return ( plugin.death - Date.now() ) / plugin.life * 100;
         };
         plugin.isAlive  = function(timestamp){
-            return plugin.death > timestamp;
+            if(plugin.isEternal()) {
+                return true;
+            }
+            else{
+                return plugin.death > timestamp;
+            }
+
         };
         plugin.isEternal= function(){
             return plugin.life === -1;
@@ -40,6 +46,31 @@
         plugin.stop = function(){
             plugin.velocity.reset();
             plugin.acceleration.reset();
+        };
+
+        plugin.isValid = function(bounds){
+            var alive = plugin.isAlive(Date.now());
+            if(!alive) {
+                return false;
+            }
+            var particleIsIn = bounds.isInbounds(plugin.position.x,plugin.position.y);
+            if(bounds !== undefined) {
+                // Is tailed ?
+                if(plugin.isTailed()) {
+                    // non vide && particule en dehors
+                    if( !plugin.tail.isEmpty() && !particleIsIn) {
+                        var lastElt = plugin.tail.getLastElement();
+                        var lastEltIsIn = bounds.isInbounds(lastElt.x,lastElt.y);
+                        return lastEltIsIn;
+                    }
+                    else {
+                        return particleIsIn;
+                    }
+                }
+                else {
+                    return particleIsIn;
+                }
+            }
         };
         //endregion
 
@@ -60,7 +91,6 @@
 
     };
     var Vector      = window.LibreJs.Plugins.Physx.Particles.Vector.prototype.constructor;
-    var Particle    = window.LibreJs.Plugins.Physx.Particles.Particle.prototype.constructor;
     var Ticker      = window.LibreJs.Plugins.Ticker.prototype.constructor;
 })(window);
 //]]>
