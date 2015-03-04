@@ -10,7 +10,7 @@
         plugin.y            = {
             min:null,
             max:null
-        };;
+        };
         
         var init = function(xmin, xmax, ymin, ymax){
             plugin.x.min = xmin;
