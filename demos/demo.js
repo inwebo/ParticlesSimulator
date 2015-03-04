@@ -13,26 +13,9 @@
     var Simulation  = window.LibreJs.Plugins.Physx.Particles.Simulation.prototype.constructor;
     var Bounds  = window.LibreJs.Plugins.Physx.Particles.Bounds.prototype.constructor;
 
-    var bounds = new Bounds(0,600,0,300);
-    //var i = bounds.isInbounds(1000,10);
-    //console.log(i);
-
-    //var ticker = new Ticker(1000);
-
+    var bounds = new Bounds(-0,600,-100,300);
     var canvas = window.document.getElementById("demo");
     var ctx    = canvas.getContext("2d");
-/*
-    var gradient = ctx.createLinearGradient(400,0,300,0);
-
-    gradient.addColorStop(0,"rgba(0,0,0,1)");
-    gradient.addColorStop(1,"rgba(0,0,0,0)");
-
-    ctx.beginPath();
-    ctx.moveTo(300,150);
-    ctx.lineTo(400,150);
-    ctx.strokeStyle = gradient;
-    ctx.stroke();
-*/
     var Demo = {
         fps:60,
         getFrameInterval : function(fps){
@@ -60,6 +43,10 @@
             maxValue: window.document.getElementById("emitter-max-value"),
             pps: window.document.getElementById("emitter-pps"),
             ppsValue: window.document.getElementById("emitter-pps-value")
+        },
+        tail : {
+            enabled: window.document.getElementById("tail"),
+            size: window.document.getElementById("tail-size")
         }
     };
 
@@ -70,11 +57,8 @@
         -1
     );
 
-    var tailConfig = new TailConfig(
-        100,
-        10
-    );
-    particle.attachTailConfig(tailConfig);
+    var tailConfig = new TailConfig(25,33);
+    //particle.attachTailConfig(tailConfig);
 
     //var bounds      = new Vector(Demo.canvas.width,Demo.canvas.height);
     var damper      = new Damper(new Vector(300,150),-200);
@@ -98,7 +82,9 @@
         // Particles per seconds
         50 ,
         // Particles life s
-        5
+        5,
+        60,
+        tailConfig
     );
 
 
@@ -126,7 +112,7 @@
     Demo.canvas.addEventListener('mousemove',function(evt){
         if(simulation.emitters[1]!== undefined) {
             var p = getPosition(evt);
-            simulation.emitters[1].move(new Particles.Vector(p.x, p.y));
+            simulation.emitters[1].move(new Vector(p.x, p.y));
         }
 
     });
@@ -176,6 +162,26 @@
     Demo.damper.y.addEventListener('input',function(evt){
         simulation.dampers[0].position.y = Demo.damper.y.value;
     });
+
+    Demo.tail.enabled.addEventListener('change',function(evt){
+        //console.log(Demo.tail.enabled.checked);
+        if(Demo.tail.enabled.checked) {
+            simulation.emitters[0].tailConfig = new TailConfig(
+                Demo.tail.size.value
+            );
+        }
+        else {
+            simulation.emitters[0].tailConfig = null;
+        }
+    });
+    Demo.tail.size.addEventListener('input',function(evt){
+        if(Demo.tail.enabled.checked) {
+            simulation.emitters[0].tailConfig = new TailConfig(
+                Demo.tail.size.value
+            );
+        }
+
+    });
     //endregion
 
 
@@ -193,6 +199,7 @@
     requestAnimationFrame(draw);
     //endregion
 
+    //region Mess
     var foo = function(){
         var  plugin = this;
         this.bar = "Hello";
@@ -234,7 +241,7 @@
         //console.profileEnd();
     }, 2000)};
     f();
-
+    //endregion
 
 })(window);
 
