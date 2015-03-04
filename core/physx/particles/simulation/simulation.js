@@ -21,8 +21,7 @@
             var t = 0;
             for(var i = 0; i<l ; i++){
                 t += plugin.emitters[i].maxParticles;
-
-            };
+            }
             return t;
         };
         plugin.getMaxParticlesByEmitter = function(){
@@ -58,60 +57,20 @@
             return plugin.bounds.isInbounds(vector.x,vector.y);
         };
 
+        /**
+         * Dois supprimer les particules mortes ou en dehors des bords ou avec la trainée
+         * encore dans la scene.
+         */
         plugin.particlesFilter = function(){
             var l = plugin.particles.length;
             var buffer = [];
+            // Pour toutes les particles
             for(var i = 0 ; i < l ; i++) {
                 var particle = plugin.particles[i];
-                if(particle.isTailed() && !particle.tail.isEmpty()) {
-                    var lastItem = particle.tail.getLastElement();
-                    if( plugin.isInbounds(lastItem) ) {
-                        buffer.push(particle);
-                    }
+                if(particle.isValid(plugin.bounds)) {
+                    buffer.push(particle);
                 }
-                else if( plugin.isInbounds(particle.position) ) {
-                    // Eternal
-                    if(particle.isEternal()) {
-                        buffer.push(particle);
-                    }
-                    else {
-                        // Still alive ?
-                        if(particle.isAlive(Date.now())) {
-                            buffer.push(particle);
-                        }
-                    }
-                }
-/*
-                if(
-                    particle.isTailed()
-                    && particle.tail.particles.length > 0
-                ) {
-                    var lastItem = particle.tail.getLastElement();
-                    console.log(lastItem.x===particle.position.x);
-                    if( plugin.bounds.isInbounds(lastItem.x,lastItem.y) ) {
-
-                        //console.log(lastItem.x, lastItem.y);
-
-                    }
-                    else {
-                        //console.log(lastItem);
-                    }
-                }
-
-                if( plugin.isInbounds(particle.position)  ) {
-                    // Eternal
-                    if(particle.isEternal()) {
-                        buffer.push(particle);
-                    }
-                    else {
-                        // Still alive ?
-                        if(particle.isAlive(Date.now())) {
-                            buffer.push(particle);
-                        }
-                    }
-                }
- */
-            };
+            }
             plugin.particles = buffer;
         };
         //endregion
@@ -185,9 +144,6 @@
         init(bounds);
 
     };
-
-    var Vector      = window.LibreJs.Plugins.Physx.Particles.Vector.prototype.constructor;
-    var Particle    = window.LibreJs.Plugins.Physx.Particles.Particle.prototype.constructor;
 
 })(window);
 //]]>
