@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- Core -->
+    <script src="core/physx/particles/header.js"></script>
+    <script src="plugins/animationpolyfill.js"></script>
+    <script src="core/ticker/ticker.js"></script>
+    <script src="core/physx/particles/vector/vector.js"></script>
+    <script src="core/physx/particles/damper/damper.js"></script>
+    <script src="core/physx/particles/particle/particle.js"></script>
+    <script src="core/physx/particles/particle/tail/tail.js"></script>
+    <script src="core/physx/particles/simulation/bounds.js"></script>
+    <script src="core/physx/particles/simulation/simulation.js"></script>
+    <script src="core/physx/particles/emitter/emitter.js"></script>
+    <script src="core/physx/particles/render/render.js"></script>
+    <script src="core/physx/particles/render/renderconfig.js"></script>
+    <script src="core/physx/particles/render/render.js"></script>
+    <script src="core/physx/particles/particle/navigator/navigator.js"></script>
+    <script src="plugins/plugin.mouse.js"></script>
+    <title>Particles</title>
+    <style>
+        canvas {
+            background-color: rgba(200,200,200,.25);
+        }
+    </style>
+</head>
+<body>
+<canvas id="demo" width="600" height="300"></canvas>
+<form id="settings-inputs" style="display: none">
+    <fieldset>
+        <legend>Particle</legend>
+        <label>Life (s), (eternal) 0<input id="particle-life" type="range" min="0" max="10" step="1" value="5">10<span id="particle-life-value"></span></label><br>
+    </fieldset>
+    <fieldset>
+        <legend>Field</legend>
+        <label>X<input id="damper-x" type="range" min="0" max="600" step="1" value="300"></label><br>
+        <label>Y<input id="damper-y" type="range" min="0" max="300" step="1" value="150"></label><br>
+        <label>Mass, (repulsif) -200<input id="damper-mass" type="range" min="-200" max="200" step="1" value="-200">(attractif) 200<span id="damper-mass-value"></span></label><br>
+    </fieldset>
+    <fieldset>
+        <legend>Emitter</legend>
+        <label>Max particules<input id="emitter-max" type="range" min="1" max="2000" step="1" value="500">2000<span id="emitter-max-value"></span></label><br>
+        <label>Particles per seconds<input id="emitter-pps" type="range" min="1" max="1000" step="1" value="500">1000<span id="emitter-pps-value"></span></label><br>
+    </fieldset>
+    <fieldset>
+        <legend>Tail <input id="tail" type="checkbox" checked="true"></legend>
+        <label>Size<input id="tail-size" type="input" value="25"></label><br>
+    </fieldset>
+
+</form>
+
+<!-- Svg -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg style="display: none"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:cc="http://creativecommons.org/ns#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+        width="600"
+        height="300"
+        id="path"
+        version="1.1"
+        inkscape:version="0.48.3.1 r9886"
+        sodipodi:docname="pathsvg.svg">
+    <defs
+            id="defs4" />
+    <sodipodi:namedview
+            id="base"
+            pagecolor="#ffffff"
+            bordercolor="#666666"
+            borderopacity="1.0"
+            inkscape:pageopacity="0.0"
+            inkscape:pageshadow="2"
+            inkscape:zoom="1"
+            inkscape:cx="420.30861"
+            inkscape:cy="84.700113"
+            inkscape:document-units="px"
+            inkscape:current-layer="path"
+            showgrid="false"
+            inkscape:window-width="1920"
+            inkscape:window-height="1048"
+            inkscape:window-x="0"
+            inkscape:window-y="0"
+            inkscape:window-maximized="1"
+            fit-margin-top="0"
+            fit-margin-left="0"
+            fit-margin-right="0"
+            fit-margin-bottom="0" />
+    <metadata
+            id="metadata7">
+        <rdf:RDF>
+            <cc:Work
+                    rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                        rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                <dc:title />
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <g
+            inkscape:label="Calque 1"
+            inkscape:groupmode="layer"
+            id="layer1" />
+    <path
+            style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+            d="M 0,0 300,300 600,250"
+            id="path-1"
+            inkscape:connector-curvature="0"
+            sodipodi:nodetypes="ccc" />
+</svg>
+
+<!-- /Svg -->
+
+<script src="demos/particle.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>
