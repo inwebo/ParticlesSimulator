@@ -20,6 +20,15 @@
         plugin.ticker = null;
         plugin.tail   = null;
 
+        var init = function(){
+            /*
+            var deathCallback = setInterval(function(){
+                console.log("dead");
+                clearInterval(deathCallback);
+            }, plugin.life);
+            */
+        };
+
         //region Helpers
         plugin.isTailed = function(){
             return plugin.tail !== null;
@@ -89,8 +98,11 @@
         };
         //endregion Physx
 
+        init();
     };
     var Vector      = window.LibreJs.Plugins.Physx.Particles.Vector.prototype.constructor;
+    var Damper      = window.LibreJs.Plugins.Physx.Particles.Damper.prototype.constructor;
+    var Particle    = window.LibreJs.Plugins.Physx.Particles.Particle.prototype.constructor;
     var Ticker      = window.LibreJs.Plugins.Ticker.prototype.constructor;
 })(window);
 //]]>
