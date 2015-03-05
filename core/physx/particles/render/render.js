@@ -11,9 +11,9 @@
             plugin.canvas = canvas;
             plugin.ctx = plugin.canvas.getContext( "2d" );
             plugin.simulation = simulation;
-            setOrigin();
+            plugin.setOrigin();
         };
-        var setOrigin = function(){
+        plugin.setOrigin = function(){
             plugin.ctx.translate( 0, plugin.canvas.height );
             plugin.ctx.scale( 1, -1 );
         };
@@ -52,7 +52,7 @@
         plugin.draw = function(){
             plugin.clear();
             plugin.drawParticles();
-            //plugin.drawDampers();
+            plugin.drawDampers();
 
         };
 
@@ -84,8 +84,16 @@
         plugin.drawDampers = function(){
             var l = plugin.simulation.dampers.length;
             for(var i = 0 ; i < l ; i++) {
-                var damper = plugin.simulation.dampers[i];
-                //damper.draw(plugin.ctx);
+                var damper =  plugin.simulation.dampers[i];
+                plugin.particle(damper,function(){
+                    plugin.ctx.save();
+                    plugin.ctx.beginPath();
+                    plugin.ctx.arc(damper.position.x, damper.position.y, 2, 0, 2 * Math.PI, false);
+                    plugin.ctx.strokeStyle = "rgba(255,0,0,1)";
+                    plugin.ctx.stroke();
+                    plugin.ctx.fillStyle = "rgba(255,0,0,1)";
+                    plugin.ctx.fill();
+                });
             };
         };
 
