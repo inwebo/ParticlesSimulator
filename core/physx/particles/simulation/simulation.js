@@ -57,6 +57,10 @@
             return plugin.bounds.isInbounds(vector.x,vector.y);
         };
 
+        plugin.isEmpty = function(){
+            return plugin.particles.length > 0;
+        }
+
         /**
          * Dois supprimer les particules mortes ou en dehors des bords ou avec la trainée
          * encore dans la scene.
