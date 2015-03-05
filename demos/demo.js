@@ -12,10 +12,12 @@
     var TailConfig  = window.LibreJs.Plugins.Physx.Particles.Tail.prototype.constructor;
     var Simulation  = window.LibreJs.Plugins.Physx.Particles.Simulation.prototype.constructor;
     var Bounds  = window.LibreJs.Plugins.Physx.Particles.Bounds.prototype.constructor;
+    var Mouse  = window.LibreJs.Plugins.Mouse;
 
     var bounds = new Bounds(-0,600,-100,300);
     var canvas = window.document.getElementById("demo");
     var ctx    = canvas.getContext("2d");
+
     var Demo = {
         fps:60,
         getFrameInterval : function(fps){
@@ -67,9 +69,7 @@
     simulation.attachDamper(damper);
     //simulation.attachParticle(particle);
 
-
-    var render      = new Render(Demo.canvas, simulation, null, Demo.getFrameInterval());
-    //render.attachParticleSprite("./sprites/heart.svg");
+    var render      = new Render(Demo.canvas, simulation);
     var emitter     = new Emitter(
         // Point
         new Vector(300,0),
@@ -111,10 +111,10 @@
 
     Demo.canvas.addEventListener('mousemove',function(evt){
         if(simulation.emitters[1]!== undefined) {
-            var p = getPosition(evt);
+            var p = Mouse.getPosition(evt);
             simulation.emitters[1].move(new Vector(p.x, p.y));
-        }
 
+        }
     });
 
     /**
@@ -180,7 +180,6 @@
                 Demo.tail.size.value
             );
         }
-
     });
     //endregion
 
@@ -243,34 +242,11 @@
     f();
     //endregion
 
+    var error = new Error();
+    //console.log(error);
+    var scripts = document.getElementsByTagName("script");
+    //console.log(scripts[scripts.length-1].getAttribute('src'));
+
+
 })(window);
-
-function getPosition(event)
-{
-    var x = new Number();
-    var y = new Number();
-    var canvas = document.getElementById("demo");
-
-    if (event.x != undefined && event.y != undefined)
-    {
-        x = event.x;
-        y = canvas.height-event.y;
-    }
-    else // Firefox method to get the position
-    {
-        x = event.clientX + document.body.scrollLeft +
-        document.documentElement.scrollLeft;
-        y = canvas.height-event.clientY;
-
-    }
-
-    x -= canvas.offsetLeft;
-
-    return {
-        x:x,
-        y:y
-    };
-
-}
-
 //]]>
