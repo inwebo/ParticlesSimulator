@@ -62,5 +62,12 @@
         return Math.sqrt( Math.pow(vector2.x - vector1.x,2) + Math.pow(vector2.y - vector1.y,2) );
     };
 
+    window.LibreJs.Plugins.Physx.Particles.Vector.prototype.getCoordinate = function(vectorFrom, vectorTo){
+        return new Vector(
+            vectorTo.x - vectorFrom.x,
+            vectorTo.y - vectorFrom.y
+        );
+    };
+
 })(window);
 //]]>
