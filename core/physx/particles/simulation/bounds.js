@@ -4,12 +4,12 @@
     window.LibreJs.Plugins.Physx.Particles.Bounds = function(xmin, xmax, ymin, ymax){
         var plugin          = this;
         plugin.x            = {
-            min:null,
-            max:null
+            min: null,
+            max: null
         };
         plugin.y            = {
-            min:null,
-            max:null
+            min: null,
+            max: null
         };
         
         var init = function(xmin, xmax, ymin, ymax){
