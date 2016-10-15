@@ -86,13 +86,13 @@
     particle.attachTailConfig(tailConfig);
     var to = new Vector(10,150);
     Demo.canvas.addEventListener('mousemove',function(evt){
-        console.log("move");
         var speed = 100;
         var pos = Mouse.getPosition(evt);
         to = new Vector(pos.x,pos.y);
         coordinates = Vector.prototype.getCoordinate(particle.position, to);
         steps = new Vector(coordinates.x/speed, coordinates.y/speed);
     });
+
     Demo.canvas.addEventListener('click',function(evt){
             var speed = 20;
             var pos = Mouse.getPosition(evt);
@@ -122,8 +122,8 @@
                 render.ctx.save();
                 render.setOrigin();
 
-                var x = Math.ceil(particle.position.x);
-                var y = Math.ceil(particle.position.y);
+                var x = particle.position.x;
+                var y = particle.position.y;
 
                 if(coordinates.x > 0) {
                     if(particle.position.x < to.x) {

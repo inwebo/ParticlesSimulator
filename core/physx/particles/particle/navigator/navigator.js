@@ -23,7 +23,7 @@
         var coords = pathNode.getAttribute('d');
         var buffer = [];
 
-        var coords = coords.split(' ');
+        coords = coords.split(' ');
         coords.shift();
 
         for(var i=0; i<coords.length;i++) {
