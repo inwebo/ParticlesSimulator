@@ -66,9 +66,11 @@
             if(bounds !== undefined) {
                 // Is tailed ?
                 if(plugin.isTailed()) {
+                    var isEmpty = plugin.tail.isEmpty();
                     // non vide && particule en dehors
                     if( !plugin.tail.isEmpty() && !particleIsIn) {
-                        var lastElt = plugin.tail.getLastElement();
+                        //var lastElt = plugin.tail.getLastElement();
+                        var lastElt = plugin.tail.particles[0];
                         var lastEltIsIn = bounds.isInbounds(lastElt.x,lastElt.y);
                         return lastEltIsIn;
                     }
