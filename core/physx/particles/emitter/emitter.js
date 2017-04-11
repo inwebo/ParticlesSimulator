@@ -5,7 +5,7 @@
      * <p>
      * Will emit (instanciate) particles from point <code>point</code>, at a rate of <code>pps</code> until <code>maxParticles</code>
      * is reach at a display rate of <code>fps</code>. Emitter will emit in an angle of <code>spread</spread>. Emitted
-     * particles will live for <code>life</code> seconds and will be progressively faded if life !== -1. Particle memebers
+     * particles will live for <code>life</code> seconds and will be progressively faded if life !== -1. Particle members
      * are randomized.
      * </p>
      *
@@ -89,7 +89,9 @@
          * @returns {window.LibreJs.Plugins.Physx.Particles.Particle}
          */
         plugin.emit = function(){
-            var angle = plugin.velocity.getAngle() + plugin.spread - (Math.random() * plugin.spread * 2);
+            // @todo !rabdomize && angle
+            var angle = plugin.velocity.getAngle() + plugin.spread - (Math.random() * plugin.spread * 4) + (270 * Math.PI / 180);
+            //var angle = plugin.velocity.getAngle() + (270 * Math.PI / 180);
             var magnitude = plugin.velocity.getMagnitude();
             var position = new Vector(plugin.position.x, plugin.position.y);
             var velocity = fromAngle(angle, magnitude);
@@ -111,7 +113,7 @@
     var Particle    = window.LibreJs.Plugins.Physx.Particles.Particle.prototype.constructor;
     var Vector      = window.LibreJs.Plugins.Physx.Particles.Vector.prototype.constructor;
     var fromAngle   = window.LibreJs.Plugins.Physx.Particles.Vector.prototype.fromAngle;
-    var Ticker = window.LibreJs.Plugins.Ticker.prototype.constructor;
+    var Ticker      = window.LibreJs.Plugins.Ticker.prototype.constructor;
     var TailConfig  = window.LibreJs.Plugins.Physx.Particles.Tail.prototype.constructor;
 })(window);
 //]]>
