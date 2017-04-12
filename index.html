@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <!-- Core -->
     <script src="core/physx/particles/header.js"></script>
+    <script src="core/math.js"></script>
     <script src="plugins/animationpolyfill.js"></script>
     <script src="core/ticker/ticker.js"></script>
     <script src="core/physx/particles/vector/vector.js"></script>
@@ -46,6 +47,7 @@
         <legend>Emitter</legend>
         <label>Max particules<input id="emitter-max" type="range" min="1" max="2000" step="1" value="500">2000<span id="emitter-max-value"></span></label><br>
         <label>Particles per seconds<input id="emitter-pps" type="range" min="1" max="1000" step="1" value="500">1000<span id="emitter-pps-value"></span></label><br>
+        <label>Spread orientation : 0 <input id="spread-orientation" type="range" min="0" max="360" step="1" value="0">360<span id="spread-orientation-value"></span></label><br>
     </fieldset>
     <fieldset>
         <legend>Tail <input id="tail" type="checkbox" checked="true"></legend>
