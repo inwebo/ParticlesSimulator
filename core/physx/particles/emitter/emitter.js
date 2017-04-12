@@ -91,7 +91,7 @@
          * @returns {window.LibreJs.Plugins.Physx.Particles.Particle}
          */
         plugin.emit = function(){
-            // @todo !rabdomize && angle
+            // @todo !randomize
             var spreadOrientation = (plugin.spreadOrientation != null) ? Math.degreesToRadians(plugin.spreadOrientation) : 0;
             var angle = plugin.velocity.getAngle() + spreadOrientation + ( plugin.spread - (Math.random() * plugin.spread * 4) );
             var magnitude = plugin.velocity.getMagnitude();
