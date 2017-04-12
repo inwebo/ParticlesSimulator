@@ -11,24 +11,26 @@
      *
      * @param {window.LibreJs.Plugins.Physx.Particles.Vector} point
      * @param {window.LibreJs.Plugins.Physx.Particles.Vector} velocity
-     * @param float spread Angle, default  Math.PI / 32
-     * @param int maxParticles Max emitter particles, default 100
-     * @param int pps How many Particles Per Seconds, default 5
-     * @param int life -1 eternal or life in seconds will progressively fade out particle, default -1
-     * @param int fps Frames Per Seconds of animation, default 60
+     * @param {float} spread Angle, default  Math.PI / 32
+     * @param {int} maxParticles Max emitter particles, default 100
+     * @param {int} pps How many Particles Per Seconds, default 5
+     * @param {int} life -1 eternal or life in seconds will progressively fade out particle, default -1
+     * @param {int} fps Frames Per Seconds of animation, default 60
+     * @param {int} spreadOrientation degrees
      * @constructor
      */
-    window.LibreJs.Plugins.Physx.Particles.Emitter = function(point, velocity, spread, maxParticles, pps, life, fps, tailConfig){
+    window.LibreJs.Plugins.Physx.Particles.Emitter = function(point, velocity, spread, maxParticles, pps, life, fps, tailConfig, spreadOrientation){
         var plugin = this;
-        plugin.position     = point;
-        plugin.velocity     = velocity;
-        plugin.spread       = spread || Math.PI / 32;
-        plugin.maxParticles = maxParticles || 100;
-        plugin.pps          = pps || 5;
-        plugin.particleLife = life || -1;
-        plugin.fps          = fps || 60;
-        plugin.ticker       = null;
-        plugin.tailConfig   = tailConfig || null;
+        plugin.position         = point;
+        plugin.velocity         = velocity;
+        plugin.spread           = spread || Math.PI / 32;
+        plugin.maxParticles     = maxParticles || 100;
+        plugin.pps              = pps || 5;
+        plugin.particleLife     = life || -1;
+        plugin.fps              = fps || 60;
+        plugin.ticker           = null;
+        plugin.tailConfig       = tailConfig || null;
+        plugin.spreadOrientation= spreadOrientation || null;
 
         var init = function(){
             plugin.ticker = new Ticker(plugin.getEmitInterval());
@@ -90,8 +92,8 @@
          */
         plugin.emit = function(){
             // @todo !rabdomize && angle
-            var angle = plugin.velocity.getAngle() + plugin.spread - (Math.random() * plugin.spread * 4) + (270 * Math.PI / 180);
-            //var angle = plugin.velocity.getAngle() + (270 * Math.PI / 180);
+            var spreadOrientation = (plugin.spreadOrientation != null) ? Math.degreesToRadians(plugin.spreadOrientation) : 0;
+            var angle = plugin.velocity.getAngle() + spreadOrientation + ( plugin.spread - (Math.random() * plugin.spread * 4) );
             var magnitude = plugin.velocity.getMagnitude();
             var position = new Vector(plugin.position.x, plugin.position.y);
             var velocity = fromAngle(angle, magnitude);
