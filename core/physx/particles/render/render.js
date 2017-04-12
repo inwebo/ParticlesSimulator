@@ -39,11 +39,11 @@
             plugin.ctx.save();
             plugin.ctx.beginPath();
             plugin.ctx.arc(particle.position.x, particle.position.y, 2, 0, 2 * Math.PI, false);
-            if (plugin.life !== -1) {
-                plugin.ctx.fillStyle = "rgba(0,0,0," + particle.getLived() / 100 + ")";
+            if (particle.life !== -1) {
+                plugin.ctx.fillStyle = "rgba(255,0,0," + particle.getLived() / 100 + ")";
             }
             else {
-                plugin.ctx.fillStyle = "rgba(0,0,0,1)";
+                plugin.ctx.fillStyle = "rgba(0,255,0,1)";
             }
             plugin.ctx.fill();
             plugin.ctx.restore();
@@ -53,7 +53,6 @@
             plugin.clear();
             plugin.drawParticles();
             plugin.drawDampers();
-
         };
 
         plugin.drawParticles = function(){
