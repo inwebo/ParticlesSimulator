@@ -44,7 +44,9 @@
             max: window.document.getElementById("emitter-max"),
             maxValue: window.document.getElementById("emitter-max-value"),
             pps: window.document.getElementById("emitter-pps"),
-            ppsValue: window.document.getElementById("emitter-pps-value")
+            ppsValue: window.document.getElementById("emitter-pps-value"),
+            spreadOrientation: window.document.getElementById("spread-orientation"),
+            spreadOrientationValue: window.document.getElementById("spread-orientation-value")
         },
         tail : {
             enabled: window.document.getElementById("tail"),
@@ -66,17 +68,17 @@
     var damper      = new Damper(new Vector(300,150),-200);
     var simulation  = new Simulation(bounds);
 
-    simulation.attachDamper(damper);
+    //simulation.attachDamper(damper);
     //simulation.attachParticle(particle);
 
     var render      = new Render(Demo.canvas, simulation);
     var emitter     = new Emitter(
         // Point
-        new Vector(300,0),
+        new Vector(300,150),
         // Velocity
-        new Vector(0,2),
-        // Spay angle
-        Math.PI/16,
+        new Vector(0,1),
+        // Spray angle
+        Math.PI/32,
         // Max particles
         500,
         // Particles per seconds
@@ -84,29 +86,12 @@
         // Particles life s
         5,
         60,
-        tailConfig
-    );
-
-
-    var emitter2     = new Emitter(
-        // Point
-        new Vector(150,150),
-        // Velocity
-        new Vector(0,2),
-        // Spay angle
-        Math.PI,
-        // Max particles
-        1,
-        // Particles per seconds
-        1,
-        // Particles life s
-        5,
-        60
+        tailConfig,
+        // Spread orientation degrees
+        0
     );
 
     simulation.attachEmitter(emitter);
-    //simulation.attachEmitter(emitter2);
-
     //region Events
 
     Demo.canvas.addEventListener('mousemove',function(evt){
@@ -139,6 +124,12 @@
     Demo.emitter.pps.addEventListener('input',function(evt){
         simulation.emitters[0].pps = Demo.emitter.pps.value;
         Demo.emitter.ppsValue.innerHTML  = '['+Demo.emitter.pps.value+']';
+    });
+
+    Demo.emitter.spreadOrientationValue.innerHTML = '[0]';
+    Demo.emitter.spreadOrientation.addEventListener('input',function(evt){
+        simulation.emitters[0].spreadOrientation = Demo.emitter.spreadOrientation.value;
+        Demo.emitter.spreadOrientationValue.innerHTML  = '['+Demo.emitter.spreadOrientation.value+']';
     });
 
     Demo.damper.x.addEventListener('input',function(evt){
