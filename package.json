@@ -1,0 +1,16 @@
+{
+  "name": "particles-simulator",
+  "version": "1.0.0",
+  "description": "Simple particles simulator, extensive use of vanilla js & canvas",
+  "main": "index.js",
+  "keywords": ["ES6", "canvas", "particle"],
+  "author": "inwebo-veritas",
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
