@@ -24,7 +24,7 @@ export default class Render {
     clear() {
         this._ctx.save();
         this._ctx.fillStyle = "whitesmoke";
-        this._ctx.fillRect(0, 0, this._canvas.width,this._canvas.height);
+        this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
         this._ctx.restore();
     }
 
@@ -43,7 +43,7 @@ export default class Render {
         this._particleRenderer = (particle) => {
             this.getContext().save();
             this.getContext().beginPath();
-            this.getContext().arc(particle.getPosition().getX(), particle.getPosition().getY(), 10, 0, 2 * Math.PI, false);
+            this.getContext().arc(particle.getOrigin().getX(), particle.getOrigin().getY(), 10, 0, 2 * Math.PI, false);
             const percent = particle.getPercentLife();
             this.getContext().fillStyle = `rgba(0,0,0,${percent}`;
             this.getContext().fill();

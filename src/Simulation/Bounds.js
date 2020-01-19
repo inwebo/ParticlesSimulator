@@ -1,8 +1,8 @@
 export default class Bounds {
 
     /**
-     * @param {Vector} min min, y min
-     * @param {Vector} max max, y max
+     * @param {Vector} min
+     * @param {Vector} max
      */
     constructor(min, max) {
         this._min = min;
@@ -13,7 +13,7 @@ export default class Bounds {
      * @param {Vector} position
      * @returns {boolean}
      */
-    isInBounds(position) {
+    inBounds(position) {
         return (
             (position.getX() < this._max.getX() && position.getX() > this._min.getX())
             &&

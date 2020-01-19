@@ -22,9 +22,9 @@ export default class Vector {
     }
 
     /**
-     * @param {number} v
+     * @param {number} y
      */
-    setY(v) {
+    setY(y) {
         this._y = y;
     }
 
@@ -42,6 +42,14 @@ export default class Vector {
      */
     getMagnitude() {
         return Math.sqrt(this._x * this._x + this._y * this._y);
+    }
+
+    /**
+     * @param {Vector} vector
+     */
+    add(vector) {
+        this._x += vector.getX();
+        this._y += vector.getY();
     }
 
     /**
@@ -65,16 +73,16 @@ export default class Vector {
      * @param {Vector} vector2
      * @returns {number}
      */
-    static getDistance(vector1, vector2) {
+    static getCartesianDistance(vector1, vector2) {
         return Math.sqrt( Math.pow(vector2.getX() - vector1.getX(),2) + Math.pow(vector2.getY() - vector1.getY(),2) );
     }
 
     /**
-     * @param {Vector} from
-     * @param {Vector} to
+     * @param {Vector} vector2
+     * @param {Vector} vector2
      * @returns {Vector}
      */
-    static getDestination(from, to) {
-        return new Vector(to.getX() - from.getX(), to.getY() - from.getY());
+    static getEuclideanlDistance(vector1, vector2) {
+        return new Vector(vector1.getX() - vector1.getX(), vector2.getY() - vector2.getY());
     }
 }

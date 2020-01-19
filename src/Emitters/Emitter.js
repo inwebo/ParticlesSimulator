@@ -5,7 +5,7 @@ import Particle from "../Particle/Particle";
 export default class Emitter {
     /**
      *
-     * @param {Vector} position
+     * @param {Vector} origin
      * @param {Vector} initialVelocity
      * @param {number} spreadAngle
      * @param {number} maxParticles
@@ -14,16 +14,16 @@ export default class Emitter {
      * @param {number} pps Particle per second
      * @param {number} fps
      */
-    constructor(position, initialVelocity, maxParticles, spreadOrientation, particleLifeTime = -1, spreadAngle= 0, pps , fps = 60) {
-        this._position = position;
-        this._initialVelocity = initialVelocity;
-        this._spreadAngle = spreadAngle;
+    constructor(origin, initialVelocity, maxParticles, spreadOrientation, particleLifeTime = -1, spreadAngle= 0, pps = 1 , fps = 60) {
+        this._origin          = origin;
+        this._initialVelocity   = initialVelocity;
+        this._spreadAngle       = spreadAngle;
         this._spreadOrientation = spreadOrientation || Math.PI / 32;
-        this._maxParticles = maxParticles;
-        this._pps = pps;
-        this._particleLifeTime = particleLifeTime;
-        this._fps = fps;
-        this._ticker = new Ticker(this.getEmitInterval());
+        this._maxParticles      = maxParticles;
+        this._pps               = pps;
+        this._particleLifeTime  = particleLifeTime;
+        this._fps               = fps;
+        this._ticker            = new Ticker(this.getEmitInterval());
     }
 
     /**
@@ -44,7 +44,7 @@ export default class Emitter {
      * @returns {number}
      */
     getFrameDuration() {
-        return (1 / this._fps) * 1000;
+        return ((1 / this._fps) * 1000);
     }
 
     /**
@@ -62,20 +62,18 @@ export default class Emitter {
     }
 
     /**
-     * @param {Vector} position
+     * @param {Vector} origin
      */
-    setPosition(position) {
-        this._position = position;
+    setOrigin(origin) {
+        this._origin = origin;
     }
-
 
     emit() {
         const spreadOrientation = Math.degreesToRadians(this._spreadOrientation);
-        const angle = this._initialVelocity.getAngle() + spreadOrientation + ( this._spreadAngle - (Math.random() * this._spreadAngle * 4) );
-        const magnitude = this._initialVelocity.getMagnitude();
-        const velocity = Vector.fromAngle(angle, magnitude);
-        const acceleration = new Vector(1,1);
+        const angle             = this._initialVelocity.getAngle() + spreadOrientation + ( this._spreadAngle - (Math.random() * this._spreadAngle * 4) );
+        const magnitude         = this._initialVelocity.getMagnitude();
+        const velocity          = Vector.fromAngle(angle, magnitude);
 
-        return new Particle(this._position, velocity, acceleration, this._particleLifeTime);
+        return new Particle(new Vector(this._origin.getX(), this._origin.getY()), velocity, null, this._particleLifeTime);
     }
 }

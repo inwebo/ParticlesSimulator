@@ -3,13 +3,13 @@ import Vector from "../Vector/Vector";
 export default class Particle {
 
     /**
-     * @param {Vector|null} position
+     * @param {Vector|null} origin
      * @param {Vector|null} velocity
      * @param {Vector|null} acceleration
      * @param {number|null} lifeTime
      */
-    constructor(position = null, velocity = null, acceleration = null, lifeTime = null) {
-        this._position      = position || new Vector(0,0);
+    constructor(origin = null, velocity = null, acceleration = null, lifeTime = null) {
+        this._origin      = origin || new Vector(0,0);
         this._velocity      = velocity || new Vector(0,0);
         this._acceleration  = acceleration || new Vector(0,0);
 
@@ -19,28 +19,31 @@ export default class Particle {
     }
 
     /**
-     * @return {number}
+     * @return {number} float [0, 1]
      */
     getPercentLife() {
-        if(this.isPerpetual()) {
-            return 1;
-        } else {
-            return (this._death - Date.now()) / this._lifeTime * 100;
-        }
+        return (this.isPerpetual()) ? 1 : (this._death - Date.now()) / this._lifeTime * 100;
     }
 
     /**
      * @returns {Vector}
      */
-    getPosition() {
-        return this._position;
+    getOrigin() {
+        return this._origin;
     }
 
     /**
-     * @param {Vector} vector
+     * @param {Vector} origin
      */
-    setPosition(vector) {
-        this._position = vector;
+    setPosition(origin) {
+        this._origin = origin;
+    }
+
+    /**
+     * @param {number} vector
+     */
+    setAcceleration(vector) {
+        this._acceleration = vector;
     }
 
     /**
@@ -63,10 +66,12 @@ export default class Particle {
     }
 
     stop() {
-        this._velocity.setX(0);
-        this._velocity.setY(0);
+        this._velocity     = new Vector(0,0);
+        this._acceleration = new Vector(0,0);
+    }
 
-        this._acceleration.setX(0);
-        this._acceleration.setY(0);
+    move() {
+        this._velocity.add(this._acceleration);
+        this._origin.add(this._velocity);
     }
 }

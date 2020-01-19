@@ -4,13 +4,13 @@ export default class Ticker {
      */
     constructor(interval) {
         this._interval        = interval;
-        this._now             = 0;
+        this._now             = Date.now();
         this._ticks           = 0;
-        this._timeIntervaLeft = 0;
+        this.setNextTick();
     }
 
-    reset() {
-        this._interval = 0;
+    setNextTick() {
+        this._nextTick = this._now + this._interval;
     }
 
     /**
@@ -24,13 +24,18 @@ export default class Ticker {
      * @param {number} timestamp
      */
     step(timestamp) {
-        this._timeIntervaLeft += Math.floor(timestamp - this._now);
-        if(this.isTicking()) {
+        if(this.isTicking(timestamp)) {
             this._ticks++;
+            this.setNow(timestamp);
+            this.setNextTick();
         }
     }
 
-    isTicking() {
-        return this._interval > this._timeIntervaLeft;
+    /**
+     * @param {number} timestamp
+     * @return {boolean}
+     */
+    isTicking(timestamp) {
+        return timestamp > this._nextTick;
     }
 }

@@ -59,11 +59,11 @@ export default class Simulation {
     }
 
     /**
-     * @param vector
+     * @param {Particle} particle
      * @return {boolean}
      */
-    inBounds(vector) {
-        return this._bounds.isInBounds(vector);
+    inBounds(particle) {
+        return this._bounds.inBounds(particle.getOrigin());
     }
 
     /**
@@ -77,7 +77,13 @@ export default class Simulation {
         let garbage = [];
 
         this._particles.forEach((particle) => {
+            if(this.inBounds(particle) === false) {
+                garbage.push(particle);
+            }
+        });
 
+        this._particles = this._particles.filter((particle) => {
+            return !garbage.includes(particle);
         });
     }
 
@@ -86,30 +92,43 @@ export default class Simulation {
      */
     step(timestamp) {
         this.garbageCollector();
-        this._emitters.forEach((emitter) => {
-            emitter.getTicker().step(timestamp);
-            // if(emitter.getTicker().isTicking()) {
-            if(true) {
-                if(emitter.getParticlesByFrame() > 1) {
-                    const particlePerFrame = emitter.getParticlesByFrame();
-                    for (let i=0; i < particlePerFrame; i++) {
-                        this.emit();
-                    }
-                } else {
-                    this.emit();
-                }
+        this.emit(timestamp);
+        this.dampers();
+        this.move();
+        this.garbageCollector();
+    }
 
-                emitter.getTicker().reset();
-                emitter.getTicker().setNow(timestamp);
+    dampers() {
+        this._dampers.forEach((damper) => {
+            this._particles.forEach((particle) => {
+                damper.getForce(particle);
+                // particle.setAcceleration(damper.getForce(particle));
+            });
+        });
+    }
+
+    emit(timestamp) {
+        this._emitters.forEach((emitter) => {
+            if(emitter.getTicker().isTicking(timestamp)) {
+                // if(emitter.getParticlesByFrame() > 1) {
+                //     const particlePerFrame = emitter.getParticlesByFrame();
+                //     for (let i=0; i < particlePerFrame; i++) {
+                //         const particle = emitter.emit();
+                //         this.pushParticle(particle);
+                //     }
+                //     emitter.getTicker().step(timestamp);
+                // } else {
+                    const particle = emitter.emit();
+                    this.pushParticle(particle);
+                    emitter.getTicker().step(timestamp);
+                // }
             }
         });
     }
 
-    emit() {
-        this._emitters.forEach((emitter) => {
-            if(this._particles.length <= this._maxParticles) {
-                this.pushParticle(emitter.emit());
-            }
+    move() {
+        this._particles.forEach((particle) => {
+            particle.move();
         });
     }
 }
