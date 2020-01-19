@@ -19,6 +19,17 @@ export default class Particle {
     }
 
     /**
+     * @return {number}
+     */
+    getPercentLife() {
+        if(this.isPerpetual()) {
+            return 1;
+        } else {
+            return (this._death - Date.now()) / this._lifeTime * 100;
+        }
+    }
+
+    /**
      * @returns {Vector}
      */
     getPosition() {

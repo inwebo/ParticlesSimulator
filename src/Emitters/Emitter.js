@@ -74,7 +74,8 @@ export default class Emitter {
         const angle = this._initialVelocity.getAngle() + spreadOrientation + ( this._spreadAngle - (Math.random() * this._spreadAngle * 4) );
         const magnitude = this._initialVelocity.getMagnitude();
         const velocity = Vector.fromAngle(angle, magnitude);
+        const acceleration = new Vector(1,1);
 
-        return new Particle(this._position, velocity, null, this._particleLifeTime);
+        return new Particle(this._position, velocity, acceleration, this._particleLifeTime);
     }
 }

@@ -8,6 +8,7 @@ export default class Simulation {
         this._dampers      = [];
         this._maxParticles = 0;
         this._particles    = [];
+        this._pps          = 60;
     }
 
     /**
@@ -34,12 +35,12 @@ export default class Simulation {
     setMaxParticles() {
         this._maxParticles = 0;
 
-        this._emitters.forEach((e) => {
-            this._maxParticles += e.getMaxParticles();
-        }).bind(length);
+        this._emitters.forEach((emitter) => {
+            this._maxParticles += emitter.getMaxParticles();
+        });
 
-        this._particles = new Array(this._maxParticles);
-        Object.freeze(this._particles);
+        // this._particles = new Array(this._maxParticles);
+        // Object.freeze(this._particles);
     }
 
     /**
@@ -73,7 +74,11 @@ export default class Simulation {
     }
 
     garbageCollector() {
+        let garbage = [];
 
+        this._particles.forEach((particle) => {
+
+        });
     }
 
     /**
@@ -83,8 +88,8 @@ export default class Simulation {
         this.garbageCollector();
         this._emitters.forEach((emitter) => {
             emitter.getTicker().step(timestamp);
-
-            if(emitter.isTicking()) {
+            // if(emitter.getTicker().isTicking()) {
+            if(true) {
                 if(emitter.getParticlesByFrame() > 1) {
                     const particlePerFrame = emitter.getParticlesByFrame();
                     for (let i=0; i < particlePerFrame; i++) {
@@ -94,7 +99,7 @@ export default class Simulation {
                     this.emit();
                 }
 
-                emitter.reset();
+                emitter.getTicker().reset();
                 emitter.getTicker().setNow(timestamp);
             }
         });
@@ -102,7 +107,7 @@ export default class Simulation {
 
     emit() {
         this._emitters.forEach((emitter) => {
-            if(this._particles.length < this._maxParticles) {
+            if(this._particles.length <= this._maxParticles) {
                 this.pushParticle(emitter.emit());
             }
         });
