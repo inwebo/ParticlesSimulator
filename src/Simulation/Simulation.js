@@ -38,9 +38,6 @@ export default class Simulation {
         this._emitters.forEach((emitter) => {
             this._maxParticles += emitter.getMaxParticles();
         });
-
-        // this._particles = new Array(this._maxParticles);
-        // Object.freeze(this._particles);
     }
 
     /**
@@ -101,8 +98,9 @@ export default class Simulation {
     dampers() {
         this._dampers.forEach((damper) => {
             this._particles.forEach((particle) => {
-                damper.getForce(particle);
-                // particle.setAcceleration(damper.getForce(particle));
+                // damper.getForce(particle);
+                // console.log(damper.getForce(particle));
+                particle.setAcceleration(damper.getForce(particle));
             });
         });
     }
