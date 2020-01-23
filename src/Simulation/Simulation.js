@@ -91,7 +91,6 @@ export default class Simulation {
      * @param {number} timestamp
      */
     step(timestamp) {
-        this.garbageCollector();
         this.emit(timestamp);
         this.dampers();
         this.move();
