@@ -18,9 +18,9 @@ export default class Damper {
             new Vector(this._origin.getX(), this._origin.getY()),
             new Vector(particle.getOrigin().getX(), particle.getOrigin().getY())
         );
-        console.log(destination);
+
         const force = this._mass / Math.pow(Math.pow(destination.getX(),2)+ Math.pow(destination.getY,2),1.5);
-        const a = Math.pow(destination.getX(), 2);
+
 
         return new Vector(destination.getX() * force, destination.getY() * force);
     }

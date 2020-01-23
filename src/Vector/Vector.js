@@ -74,7 +74,7 @@ export default class Vector {
      * @returns {number}
      */
     static getCartesianDistance(vector1, vector2) {
-        return Math.sqrt( Math.pow(vector2.getX() - vector1.getX(),2) + Math.pow(vector2.getY() - vector1.getY(),2) );
+        return Math.sqrt(Math.pow(vector2.getX() - vector1.getX(), 2) + Math.pow(vector2.getY() - vector1.getY(), 2))
     }
 
     /**
@@ -83,6 +83,6 @@ export default class Vector {
      * @returns {Vector}
      */
     static getEuclideanlDistance(vector1, vector2) {
-        return new Vector(vector1.getX() - vector1.getX(), vector2.getY() - vector2.getY());
+        return new Vector(vector1.getX() - vector2.getX(), vector1.getY() - vector2.getY());
     }
 }

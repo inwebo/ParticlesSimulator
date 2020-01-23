@@ -17,8 +17,8 @@ export default class Render {
     }
 
     setOrigin() {
-        this._ctx.translate( 0, this._canvas.height );
-        this._ctx.scale( 1, -1 );
+        this._ctx.translate(0, this._canvas.height)
+        this._ctx.scale(1, -1)
     }
 
     clear() {
