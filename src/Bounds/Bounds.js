@@ -1,16 +1,18 @@
+import Vector2D from "@inwebo/vector/src/Vector2D";
+
 export default class Bounds {
 
     /**
-     * @param {Vector} min
-     * @param {Vector} max
+     * @param {Vector2D|null} min
+     * @param {Vector2D|null} max
      */
-    constructor(min, max) {
-        this._min = min;
-        this._max = max;
+    constructor(min= null, max = null) {
+        this._min = min || new Vector2D();
+        this._max = max || new Vector2D();
     }
 
     /**
-     * @param {Vector} position
+     * @param {Vector2D} position
      * @returns {boolean}
      */
     inBounds(position) {

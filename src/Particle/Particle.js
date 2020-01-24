@@ -1,77 +1,25 @@
-import Vector from "../Vector/Vector";
+import Vector2D from "@inwebo/vector/src/Vector2D";
 
 export default class Particle {
 
     /**
-     * @param {Vector|null} origin
-     * @param {Vector|null} velocity
-     * @param {Vector|null} acceleration
-     * @param {number|null} lifeTime
+     * @param {Vector2D|null} position
+     * @param {Vector2D|null} velocity
+     * @param {Vector2D|null} acceleration
      */
-    constructor(origin = null, velocity = null, acceleration = null, lifeTime = null) {
-        this._origin      = origin || new Vector(0,0);
-        this._velocity      = velocity || new Vector(0,0);
-        this._acceleration  = acceleration || new Vector(0,0);
-
-        this._lifeTime      = lifeTime || -1;
-        this._birth         = Date.now();
-        this._death         = (this._lifeTime === -1) ? -1 : this._birth + this._lifeTime;
-    }
-
-    /**
-     * @return {number} float [0, 1]
-     */
-    getPercentLife() {
-        return (this.isPerpetual()) ? 1 : (this._death - Date.now()) / this._lifeTime * 100;
-    }
-
-    /**
-     * @returns {Vector}
-     */
-    getOrigin() {
-        return this._origin;
-    }
-
-    /**
-     * @param {Vector} origin
-     */
-    setPosition(origin) {
-        this._origin = origin;
-    }
-
-    /**
-     * @param {number} vector
-     */
-    setAcceleration(vector) {
-        this._acceleration = vector;
-    }
-
-    /**
-     * @returns {boolean}
-     */
-    isPerpetual() {
-        return this._lifeTime === -1;
-    }
-
-    /**
-     * @param {number} timestamp
-     * @returns {boolean}
-     */
-    isAlive(timestamp) {
-        if(this.isPerpetual()) {
-            return true;
-        } else {
-            return this._death > timestamp;
-        }
+    constructor(position = null, velocity = null, acceleration = null) {
+        this._position     = position     || new Vector2D();
+        this._velocity     = velocity     || new Vector2D();
+        this._acceleration = acceleration || new Vector2D();
     }
 
     stop() {
-        this._velocity     = new Vector(0,0);
-        this._acceleration = new Vector(0,0);
+        this._velocity     = this._velocity.zero();
+        this._acceleration = this._acceleration.zero();
     }
 
     move() {
         this._velocity.add(this._acceleration);
-        this._origin.add(this._velocity);
+        this._position.add(this._velocity);
     }
 }

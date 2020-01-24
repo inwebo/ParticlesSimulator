@@ -63,12 +63,16 @@ export default class BaseRender {
                 break;
 
             case RENDER2D_ORIGIN_BOTTOM:
-                this.getCtx().translate(this._canvas.width, 0);
-                this.getCtx().scale(1, 1);
+                this.getCtx().translate(this._canvas.width / 2, 1);
+                this.getCtx().scale(0.5, 1);
                 break;
         }
     }
 
+    /**
+     * May be overrided in sub classes.
+     * @private
+     */
     _setOrigin() {}
 
     /**
