@@ -1,7 +1,7 @@
 {
   "name": "particles-simulator",
   "version": "1.0.0",
-  "description": "Simple particles simulator, extensive use of vanilla js & canvas",
+  "description": "Simple particles simulator, extensive use of vanilla js ES6 & canvas",
   "main": "index.js",
   "keywords": [
     "ES6",
