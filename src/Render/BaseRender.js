@@ -1,3 +1,13 @@
+const RENDER2D_ORIGIN_TOP          = "RENDER2D_ORIGIN_TOP";
+const RENDER2D_ORIGIN_TOP_RIGHT    = "RENDER2D_ORIGIN_TOP_RIGHT";
+const RENDER2D_ORIGIN_RIGHT        = "RENDER2D_ORIGIN_RIGHT";
+const RENDER2D_ORIGIN_BOTTOM_RIGHT = "RENDER2D_ORIGIN_BOTTOM_RIGHT";
+const RENDER2D_ORIGIN_BOTTOM       = "RENDER2D_ORIGIN_BOTTOM";
+const RENDER2D_ORIGIN_BOTTOM_LEFT  = "RENDER2D_ORIGIN_BOTTOM_LEFT";
+const RENDER2D_ORIGIN_LEFT         = "RENDER2D_ORIGIN_LEFT";
+const RENDER2D_ORIGIN_TOP_LEFT     = "RENDER2D_ORIGIN_TOP_LEFT";
+const RENDER2D_ORIGIN_CENTER       = "RENDER2D_ORIGIN_CENTER";
+
 export default class BaseRender {
 
     /**
@@ -13,41 +23,46 @@ export default class BaseRender {
     /**
      * @param {String} position
      */
-    setOriginPosition(position = 'center') {
+    setOriginPosition(position = RENDER2D_ORIGIN_TOP_LEFT) {
         switch (position) {
-            case 'top_left':
+            case RENDER2D_ORIGIN_TOP_LEFT:
                 break;
-            case 'center':
+            case RENDER2D_ORIGIN_CENTER:
                 this.getCtx().translate(this._canvas.width / 2, this._canvas.height / 2);
                 this.getCtx().scale(0.5, 0.5);
                 break;
 
-            case 'bottom_left':
+            case RENDER2D_ORIGIN_BOTTOM_LEFT:
                 this.getCtx().translate(0, this._canvas.height);
                 this.getCtx().scale(1, -1);
                 break;
 
-            case 'left':
+            case RENDER2D_ORIGIN_LEFT:
                 this.getCtx().translate(0, this._canvas.height / 2);
                 this.getCtx().scale(1, 0.5);
                 break;
 
-            case 'top':
+            case RENDER2D_ORIGIN_TOP:
                 this.getCtx().translate(this._canvas.width / 2, 0);
                 this.getCtx().scale(0.5, 1);
                 break;
 
-            case 'top_right':
+            case RENDER2D_ORIGIN_TOP_RIGHT:
                 this.getCtx().translate(this._canvas.width, 0);
                 this.getCtx().scale(1, 1);
                 break;
 
-            case 'right':
+            case RENDER2D_ORIGIN_RIGHT:
                 this.getCtx().translate(this._canvas.width, this._canvas.height / 2);
                 this.getCtx().scale(-1, 0.5);
                 break;
 
-            case 'bottom_right':
+            case RENDER2D_ORIGIN_BOTTOM_RIGHT:
+                this.getCtx().translate(this._canvas.width, 0);
+                this.getCtx().scale(1, 1);
+                break;
+
+            case RENDER2D_ORIGIN_BOTTOM:
                 this.getCtx().translate(this._canvas.width, 0);
                 this.getCtx().scale(1, 1);
                 break;
