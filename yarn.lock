@@ -708,10 +708,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@inwebo/vector@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@inwebo/vector/-/vector-0.0.2.tgz#0f519e280700ea9bb58dd839af1d0817678ad648"
-  integrity sha512-Nym0wvV/UL490aDxHeDYdcibz9BdBWUptkVOclo6OLApf5cvF/Ok06ETAJqSqUBCr7ljRtsVCXuqlqYqhwXVRQ==
+"@inwebo/vector@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@inwebo/vector/-/vector-0.0.4.tgz#8563180c20e3da3f0599d8bb5178127436d8dd96"
+  integrity sha512-66l+QfiG2irGP4HGLhhJzVoibGTVT32llGk1G16lRQmDn7abqRmKXuojs43nibEDFefi0GvJNHfKanI/0wcp8w==
   dependencies:
     lodash "^4.17.15"
 
