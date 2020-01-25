@@ -1,8 +1,7 @@
-
-import RenderVector from "../src/Render/RenderVector";
 import Vector2D from "@inwebo/vector/src/Vector2D";
+import RenderVector from "../src/Render/RenderVector";
 import Fps from "../src/Fps/Fps";
-import FpsRender from "../src/Render/FpsRender";
+import RenderFps from "../src/Render/RenderFps";
 import Bounds from "../src/Bounds/Bounds";
 import Particle from "../src/Particle/Particle";
 import RenderParticle from "../src/Render/RenderParticle";
@@ -12,7 +11,7 @@ document.addEventListener("DOMContentLoaded",() => {
   // region instances
   const layer0       = document.getElementById('layer0');
   const renderParticle = new RenderParticle(layer0, {alpha: false});
-  const renderFps    = new FpsRender(layer0);
+  const renderFps    = new RenderFps(layer0);
   const bounds       = new Bounds(new Vector2D(), new Vector2D(600, 600));
   // endregion
 
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded",() => {
   /**
    * @type {Particle}
    */
-  const particle = new Particle(new Vector2D(300,300), new Vector2D(0,2.5));
+  const particle = new Particle(new Vector2D(300,300), new Vector2D(-5,-2.5));
   // endregion
 
   const draw = () => {
@@ -34,6 +33,10 @@ document.addEventListener("DOMContentLoaded",() => {
 
       if(!bounds.inBoundsY(particle.getPosition().getY())) {
         particle.getVelocity().negativeY();
+      }
+
+      if(!bounds.inBounds(particle.getPosition(), false)) {
+        console.log('out');
       }
 
       particle.move();
