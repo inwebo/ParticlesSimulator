@@ -12,14 +12,79 @@ export default class Bounds {
     }
 
     /**
-     * @param {Vector2D} position
+     * @param {number} number
+     * @return {boolean}
+     * @private
+     */
+    _inBoundsX(number) {
+        return number <= this._max.getX() && number >= this._min.getX();
+    }
+
+    /**
+     * @param {number} number
+     * @return {boolean}
+     * @private
+     */
+    _inBoundsXStrict(number) {
+        return number < this._max.getX() && number > this._min.getX();
+    }
+
+    /**
+     * @param {number} number
+     * @param {boolean} strict
+     * @return {boolean}
+     */
+    inBoundsX(number, strict = true) {
+        return (strict) ? this._inBoundsXStrict(number) : this._inBoundsX(number);
+    }
+
+
+    /**
+     * @param {number} number
+     * @return {boolean}
+     * @private
+     */
+    _inBoundsY(number) {
+        return number <= this._max.getY() && number >= this._min.getY();
+    }
+
+    /**
+     * @param {number} number
+     * @return {boolean}
+     * @private
+     */
+    _inBoundsYStrict(number) {
+        return number < this._max.getY() && number > this._min.getY();
+    }
+
+    /**
+     * @param {number} number
+     * @param {boolean} strict
+     * @return {boolean}
+     */
+    inBoundsY(number, strict = true) {
+        return (strict) ? this._inBoundsYStrict(number) : this._inBoundsY(number);
+    }
+
+    _inBoundsStrict(vector) {
+        return this._inBoundsXStrict(vector.getX()) && this._inBoundsYStrict(vector.getY());
+    }
+
+    /**
+     * @param {Vector2D} vector
+     * @return {boolean}
+     * @private
+     */
+    _inBounds(vector) {
+        return this._inBoundsX(vector.getX()) && this._inBoundsY(vector.getY());
+    }
+
+    /**
+     * @param {Vector2D} vector
+     * @param {boolean} strict
      * @returns {boolean}
      */
-    inBounds(position) {
-        return (
-            (position.getX() < this._max.getX() && position.getX() > this._min.getX())
-            &&
-            (position.getY() < this._max.getY() && position.getY() > this._min.getY())
-        );
+    inBounds(vector, strict = true) {
+        return (strict) ? this._inBoundsStrict(vector) : this._inBounds(vector);
     }
 }
