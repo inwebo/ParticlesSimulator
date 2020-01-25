@@ -81,8 +81,8 @@ export default class BaseRender {
      */
     draw(...subject) {
         this.getCtx().save();
-        this._setOrigin();
         this._clear(subject);
+        this._setOrigin();
         this._draw(subject);
         this.getCtx().restore();
     }
