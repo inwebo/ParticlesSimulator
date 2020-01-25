@@ -3,26 +3,45 @@ import RenderVector from "../src/Render/RenderVector";
 import Vector2D from "@inwebo/vector/src/Vector2D";
 import Fps from "../src/Fps/Fps";
 import FpsRender from "../src/Render/FpsRender";
+import Bounds from "../src/Bounds/Bounds";
+import Particle from "../src/Particle/Particle";
+import RenderParticle from "../src/Render/RenderParticle";
 
-document.addEventListener("DOMContentLoaded",function() {
+document.addEventListener("DOMContentLoaded",() => {
 
   // region instances
-  const layer0 = document.getElementById('layer0');
-  const render = new RenderVector(layer0);
-  const renderFps = new FpsRender(layer0);
+  const layer0       = document.getElementById('layer0');
+  const renderParticle = new RenderParticle(layer0, {alpha: false});
+  const renderFps    = new FpsRender(layer0);
+  const bounds       = new Bounds(new Vector2D(), new Vector2D(600, 600));
   // endregion
 
   // region subjects
-  const vector = new Vector2D(0, 0);
-  const fps    = new Fps();
+  const fps = new Fps();
+  /**
+   * @type {Particle}
+   */
+  const particle = new Particle(new Vector2D(300,300), new Vector2D(0,2.5));
   // endregion
 
   const draw = () => {
     setTimeout(() => {
       renderFps.draw(fps.get());
-      render.draw(vector);
+
+      if(!bounds.inBoundsX(particle.getPosition().getX())) {
+        particle.getVelocity().negativeX();
+      }
+
+      if(!bounds.inBoundsY(particle.getPosition().getY())) {
+        particle.getVelocity().negativeY();
+      }
+
+      particle.move();
+
+      renderParticle.draw(particle);
+
       requestAnimationFrame(draw);
-    }, 10);
+    }, 1);
   };
 
   requestAnimationFrame(draw);
