@@ -46,17 +46,17 @@ export default class BaseRender {
 
             case Render2DEnum.ORIGIN_RIGHT:
                 this.getCtx().translate(this._canvas.width, this._canvas.height / 2);
-                this.getCtx().scale(-1, 0.5);
+                this.getCtx().scale(-1, 1);
                 break;
 
             case Render2DEnum.ORIGIN_BOTTOM_RIGHT:
                 this.getCtx().translate(this._canvas.width, 0);
-                this.getCtx().scale(1, 1);
+                this.getCtx().scale(-1, 1);
                 break;
 
             case Render2DEnum.ORIGIN_BOTTOM:
                 this.getCtx().translate(this._canvas.width / 2, this._canvas.height);
-                this.getCtx().scale(0.5, -1);
+                this.getCtx().scale(1, -1);
                 break;
         }
     }
