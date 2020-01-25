@@ -1,6 +1,6 @@
 import Render2D from "./Render2D";
 
-export default class FpsRender extends Render2D {
+export default class RenderFps extends Render2D {
     /**
      * @param subject
      * @private
