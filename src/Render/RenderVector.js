@@ -3,13 +3,12 @@ import Vector2D from "@inwebo/vector/src/Vector2D";
 
 export default class RenderVector extends Render2D {
 
+    /**
+     * @todo modification Bounds
+     * @private
+     */
     _setOrigin() {
         // this.setOriginPosition(this._position.ORIGIN_CENTER);
-    }
-
-    _clear(...subject) {
-        this.getCtx().fillStyle = 'rgba(255,255,255,0.3)';
-        this.getCtx().fillRect(0,0,this._canvas.width,this._canvas.height);
     }
 
     /**
