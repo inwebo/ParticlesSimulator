@@ -5,3 +5,4 @@ import Render2D from "./Render/Render2D";
 import RenderFps from "./Render/RenderFps";
 import RenderVector from "./Render/RenderVector";
 import RenderParticle from "./Render/RenderParticle";
+import Simulation from "./Simulation/Simulation";
