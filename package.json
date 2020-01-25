@@ -1,6 +1,6 @@
 {
   "name": "particles-simulator",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Simple particles simulator, extensive use of vanilla js ES6 & canvas",
   "main": "index.js",
   "keywords": [
@@ -9,7 +9,7 @@
     "particle"
   ],
   "author": "inwebo-veritas",
-  "license": "GNU GENERAL PUBLIC LICENSE",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
