@@ -1,12 +1,4 @@
-const RENDER2D_ORIGIN_TOP          = "RENDER2D_ORIGIN_TOP";
-const RENDER2D_ORIGIN_TOP_RIGHT    = "RENDER2D_ORIGIN_TOP_RIGHT";
-const RENDER2D_ORIGIN_RIGHT        = "RENDER2D_ORIGIN_RIGHT";
-const RENDER2D_ORIGIN_BOTTOM_RIGHT = "RENDER2D_ORIGIN_BOTTOM_RIGHT";
-const RENDER2D_ORIGIN_BOTTOM       = "RENDER2D_ORIGIN_BOTTOM";
-const RENDER2D_ORIGIN_BOTTOM_LEFT  = "RENDER2D_ORIGIN_BOTTOM_LEFT";
-const RENDER2D_ORIGIN_LEFT         = "RENDER2D_ORIGIN_LEFT";
-const RENDER2D_ORIGIN_TOP_LEFT     = "RENDER2D_ORIGIN_TOP_LEFT";
-const RENDER2D_ORIGIN_CENTER       = "RENDER2D_ORIGIN_CENTER";
+import { Render2DEnum } from "./Render2DEnum";
 
 export default class BaseRender {
 
@@ -23,48 +15,48 @@ export default class BaseRender {
     /**
      * @param {String} position
      */
-    setOriginPosition(position = RENDER2D_ORIGIN_TOP_LEFT) {
+    setOriginPosition(position = Render2DEnum.ORIGIN_TOP_LEFT) {
         switch (position) {
-            case RENDER2D_ORIGIN_TOP_LEFT:
+            case Render2DEnum.ORIGIN_TOP_LEFT:
                 break;
-            case RENDER2D_ORIGIN_CENTER:
+            case Render2DEnum.ORIGIN_CENTER:
                 this.getCtx().translate(this._canvas.width / 2, this._canvas.height / 2);
                 this.getCtx().scale(0.5, 0.5);
                 break;
 
-            case RENDER2D_ORIGIN_BOTTOM_LEFT:
+            case Render2DEnum.ORIGIN_BOTTOM_LEFT:
                 this.getCtx().translate(0, this._canvas.height);
                 this.getCtx().scale(1, -1);
                 break;
 
-            case RENDER2D_ORIGIN_LEFT:
+            case Render2DEnum.ORIGIN_LEFT:
                 this.getCtx().translate(0, this._canvas.height / 2);
                 this.getCtx().scale(1, 0.5);
                 break;
 
-            case RENDER2D_ORIGIN_TOP:
+            case Render2DEnum.ORIGIN_TOP:
                 this.getCtx().translate(this._canvas.width / 2, 0);
                 this.getCtx().scale(0.5, 1);
                 break;
 
-            case RENDER2D_ORIGIN_TOP_RIGHT:
+            case Render2DEnum.ORIGIN_TOP_RIGHT:
                 this.getCtx().translate(this._canvas.width, 0);
                 this.getCtx().scale(1, 1);
                 break;
 
-            case RENDER2D_ORIGIN_RIGHT:
+            case Render2DEnum.ORIGIN_RIGHT:
                 this.getCtx().translate(this._canvas.width, this._canvas.height / 2);
                 this.getCtx().scale(-1, 0.5);
                 break;
 
-            case RENDER2D_ORIGIN_BOTTOM_RIGHT:
+            case Render2DEnum.ORIGIN_BOTTOM_RIGHT:
                 this.getCtx().translate(this._canvas.width, 0);
                 this.getCtx().scale(1, 1);
                 break;
 
-            case RENDER2D_ORIGIN_BOTTOM:
-                this.getCtx().translate(this._canvas.width / 2, 1);
-                this.getCtx().scale(0.5, 1);
+            case Render2DEnum.ORIGIN_BOTTOM:
+                this.getCtx().translate(this._canvas.width / 2, this._canvas.height);
+                this.getCtx().scale(0.5, -1);
                 break;
         }
     }
@@ -79,7 +71,8 @@ export default class BaseRender {
      * @param {HTMLCanvasElement} canvas
      */
     constructor(canvas) {
-        this._canvas = canvas;
+        this._canvas   = canvas;
+        this._position = Render2DEnum;
     }
 
     /**

@@ -4,7 +4,7 @@ import Vector2D from "@inwebo/vector/src/Vector2D";
 export default class RenderVector extends Render2D {
 
     _setOrigin() {
-        this.setOriginPosition();
+        this.setOriginPosition(this._position.ORIGIN_BOTTOM);
     }
 
     /**
