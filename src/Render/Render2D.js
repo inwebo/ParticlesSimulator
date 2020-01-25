@@ -5,7 +5,7 @@ export default class Render2D extends BaseRender {
     /**
      * @param {String|null} context 2d|webgl|webgl2|bitmaprenderer
      * @param {Object} contextAttributes
-     * @return {CanvasRenderingContext2D | ImageBitmapRenderingContext | WebGLRenderingContext | WebGL2RenderingContext | RenderingContext}
+     * @return {CanvasRenderingContext2D}
      * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
      */
     getCtx(context= '2d', contextAttributes = {alpha: true}) {
