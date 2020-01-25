@@ -12,6 +12,13 @@ export default class Particle {
     /**
      * @return {Vector2D}
      */
+    setPosition(vector)  {
+        return this._position = vector;
+    }
+
+    /**
+     * @return {Vector2D}
+     */
     getVelocity()  {
         return this._velocity;
     }
