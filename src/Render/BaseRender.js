@@ -21,7 +21,6 @@ export default class BaseRender {
                 break;
             case Render2DEnum.ORIGIN_CENTER:
                 this.getCtx().translate(this._canvas.width / 2, this._canvas.height / 2);
-                this.getCtx().scale(0.5, 0.5);
                 break;
 
             case Render2DEnum.ORIGIN_BOTTOM_LEFT:
@@ -31,17 +30,14 @@ export default class BaseRender {
 
             case Render2DEnum.ORIGIN_LEFT:
                 this.getCtx().translate(0, this._canvas.height / 2);
-                this.getCtx().scale(1, 0.5);
                 break;
 
             case Render2DEnum.ORIGIN_TOP:
                 this.getCtx().translate(this._canvas.width / 2, 0);
-                this.getCtx().scale(0.5, 1);
                 break;
 
             case Render2DEnum.ORIGIN_TOP_RIGHT:
                 this.getCtx().translate(this._canvas.width, 0);
-                this.getCtx().scale(1, 1);
                 break;
 
             case Render2DEnum.ORIGIN_RIGHT:
@@ -50,8 +46,8 @@ export default class BaseRender {
                 break;
 
             case Render2DEnum.ORIGIN_BOTTOM_RIGHT:
-                this.getCtx().translate(this._canvas.width, 0);
-                this.getCtx().scale(-1, 1);
+                this.getCtx().translate(this._canvas.width, this._canvas.height);
+                this.getCtx().scale(-1, -1);
                 break;
 
             case Render2DEnum.ORIGIN_BOTTOM:
