@@ -85,6 +85,11 @@ export default class Bounds {
         return (_strict) ? this._inBoundsYStrict(number) : this._inBoundsY(number);
     }
 
+    /**
+     * @param {Vector2D} vector
+     * @return {boolean}
+     * @private
+     */
     _inBoundsStrict(vector) {
         Vector2DValidator.validate(vector);
         return this._inBoundsXStrict(vector.getX()) && this._inBoundsYStrict(vector.getY());
