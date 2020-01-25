@@ -1,5 +1,5 @@
 import Vector2D from "@inwebo/vector/src/Vector2D";
-
+import Vector2DValidator from "@inwebo/vector/src/Vector2DValidator";
 export default class Bounds {
 
     /**
@@ -67,6 +67,7 @@ export default class Bounds {
     }
 
     _inBoundsStrict(vector) {
+        Vector2DValidator.validate(vector);
         return this._inBoundsXStrict(vector.getX()) && this._inBoundsYStrict(vector.getY());
     }
 
@@ -76,6 +77,7 @@ export default class Bounds {
      * @private
      */
     _inBounds(vector) {
+        Vector2DValidator.validate(vector);
         return this._inBoundsX(vector.getX()) && this._inBoundsY(vector.getY());
     }
 
@@ -85,6 +87,7 @@ export default class Bounds {
      * @returns {boolean}
      */
     inBounds(vector, strict = true) {
+        Vector2DValidator.validate(vector);
         return (strict) ? this._inBoundsStrict(vector) : this._inBounds(vector);
     }
 }
