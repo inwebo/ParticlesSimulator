@@ -12,6 +12,25 @@ export default class Bounds {
     }
 
     /**
+     * Are bounds in this
+     *
+     * @param {Bounds} bounds
+     * @param {boolean} _strict
+     */
+    within(bounds, _strict = true) {
+
+    }
+
+    /**
+     * Are bounds outside this
+     * @param {Bounds} bounds
+     * @param {boolean} _strict
+     */
+    without(bounds, _strict = true) {
+
+    }
+
+    /**
      * @param {number} number
      * @return {boolean}
      * @private
@@ -86,7 +105,7 @@ export default class Bounds {
      * @param {boolean} _strict
      * @returns {boolean}
      */
-    inBounds(vector, _strict) {
+    inBounds(vector, _strict = true) {
         Vector2DValidator.validate(vector);
         return (_strict) ? this._inBoundsStrict(vector) : this._inBounds(vector);
     }
