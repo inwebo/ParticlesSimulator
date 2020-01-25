@@ -17,7 +17,7 @@ export default class RenderParticle extends RenderVector {
 
         this.getCtx().beginPath();
         this.getCtx().fillStyle ='rgba(0,0,0,1)';
-        this.getCtx().arc(particle.getX(), particle.getY(), 50, 0, 2 * Math.PI, false);
+        this.getCtx().arc(particle.getX(), particle.getY(), 15, 0, 2 * Math.PI, false);
         this.getCtx().fill();
     }
 }
