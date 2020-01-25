@@ -34,15 +34,10 @@ document.addEventListener("DOMContentLoaded",() => {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  for (let i = 0; i < 1; i++) {
-    const px = getRandomInt(positions.getY());
-    const py = getRandomInt(positions.getY());
+  for (let i = 0; i < 15; i++) {
 
-    const vx = getRandomInt(velocities.getY());
-    const vy = getRandomInt(velocities.getY());
-
-    const pos = new Vector2D(px, py);
-    const vel = new Vector2D(vx, vy);
+    const pos = new Vector2D(getRandomInt(positions.getY()), getRandomInt(positions.getY()));
+    const vel = new Vector2D(getRandomInt(velocities.getY()), getRandomInt(velocities.getY()));
 
     const particle = new Particle(pos, vel);
 
@@ -53,12 +48,12 @@ document.addEventListener("DOMContentLoaded",() => {
   const draw = () => {
     setTimeout(() => {
       renderBackGround.draw();
-      renderFps.draw(fps.get());
+
       simulation.step();
       simulation._particles.forEach((particle) => {
         renderParticle.draw(particle);
       });
-
+      renderFps.draw(fps.get());
       requestAnimationFrame(draw);
     }, 1);
   };
