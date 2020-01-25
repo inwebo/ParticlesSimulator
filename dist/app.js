@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded",() => {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 1; i++) {
     const px = getRandomInt(positions.getY());
     const py = getRandomInt(positions.getY());
 
@@ -48,10 +48,6 @@ document.addEventListener("DOMContentLoaded",() => {
 
     simulation._particles.push(particle);
   }
-
-
-
-
   // endregion
 
   const draw = () => {
