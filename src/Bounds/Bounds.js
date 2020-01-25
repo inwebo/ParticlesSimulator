@@ -31,11 +31,11 @@ export default class Bounds {
 
     /**
      * @param {number} number
-     * @param {boolean} strict
+     * @param {boolean} _strict
      * @return {boolean}
      */
-    inBoundsX(number, strict = true) {
-        return (strict) ? this._inBoundsXStrict(number) : this._inBoundsX(number);
+    inBoundsX(number, _strict = true) {
+        return (_strict) ? this._inBoundsXStrict(number) : this._inBoundsX(number);
     }
 
 
@@ -59,11 +59,11 @@ export default class Bounds {
 
     /**
      * @param {number} number
-     * @param {boolean} strict
+     * @param {boolean} _strict
      * @return {boolean}
      */
-    inBoundsY(number, strict = true) {
-        return (strict) ? this._inBoundsYStrict(number) : this._inBoundsY(number);
+    inBoundsY(number, _strict = true) {
+        return (_strict) ? this._inBoundsYStrict(number) : this._inBoundsY(number);
     }
 
     _inBoundsStrict(vector) {
@@ -83,11 +83,11 @@ export default class Bounds {
 
     /**
      * @param {Vector2D} vector
-     * @param {boolean} strict
+     * @param {boolean} _strict
      * @returns {boolean}
      */
-    inBounds(vector, strict = true) {
+    inBounds(vector, _strict) {
         Vector2DValidator.validate(vector);
-        return (strict) ? this._inBoundsStrict(vector) : this._inBounds(vector);
+        return (_strict) ? this._inBoundsStrict(vector) : this._inBounds(vector);
     }
 }
