@@ -4,7 +4,7 @@ import Vector2D from "@inwebo/vector/src/Vector2D";
 export default class RenderVector extends Render2D {
 
     _setOrigin() {
-        this.setOriginPosition(this._position.ORIGIN_BOTTOM);
+        this.setOriginPosition(this._position.ORIGIN_BOTTOM_LEFT);
     }
 
     /**
@@ -13,9 +13,6 @@ export default class RenderVector extends Render2D {
      * @protected
      */
     _draw(...subject) {
-        /**
-         * @type {Vector2D}
-         */
         const particle = Vector2D.fromObject(subject[0]);
 
         this.getCtx().beginPath();
