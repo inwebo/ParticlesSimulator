@@ -1,6 +1,5 @@
 import Vector2D from '@inwebo/vector/src/Vector2D';
 import Particle from "../Particle/Particle";
-import KinematicsEnum from "../Kinematics/KinematicsEnum";
 
 export default class Kinematics {
     /**
@@ -11,11 +10,20 @@ export default class Kinematics {
     }
 
     static uniformAcceleration(particle) {
-        // cherche acceleration
-            // velocity
-            const velocity = Math.sqrt(particle.getVelocity().getY() + 2 * 9.81);
-            // console.log(KinematicsEnum.EARTH_GRAVITY);
-            particle.getAcceleration().set(particle.getVelocity().getX(), velocity);
-            Kinematics.uniform(particle);
+        // const velocity = Math.sqrt(particle.getVelocity().getY() + 2 * 9.81);
+        // particle.getAcceleration().set(particle.getVelocity().getX(), velocity);
+        // particle.getVelocity().set(particle.getVelocity().getX(), particle.getVelocity().getY() + particle.getAcceleration().getY());
+
+        Kinematics.uniform(particle);
+    }
+
+    static simpleGravity(particle) {
+        let acceleration = particle.getVelocity().getY();
+        acceleration *= particle.getAcceleration().getX();
+        acceleration += particle.getAcceleration().getY();
+
+        particle.getVelocity().set(particle.getVelocity().getX(), acceleration);
+
+        Kinematics.uniform(particle);
     }
 }
