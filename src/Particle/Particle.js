@@ -59,7 +59,7 @@ export default class Particle {
         if(this.isEternal()) {
             return true;
         } else {
-            return performance.now() < this._death;
+            return performance.now() <= this._death;
         }
     }
 
