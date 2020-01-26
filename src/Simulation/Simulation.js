@@ -1,3 +1,6 @@
+import Vector2D from '@inwebo/vector/src/Vector2D';
+import Kinematics from "../Kinematics/Kinematics";
+
 export default class Simulation {
     constructor(bounds) {
         this._bounds    = bounds;
@@ -29,7 +32,6 @@ export default class Simulation {
     step() {
         this.garbageCollector();
         this._particles.forEach((particle) => {
-
             if(!this._bounds.inBoundsX(particle.getPosition().getX())) {
                 particle.getVelocity().negativeX();
             }
@@ -38,7 +40,7 @@ export default class Simulation {
                 particle.getVelocity().negativeY();
             }
 
-            particle.move();
+            Kinematics.uniformAcceleration(particle);
         });
     }
 }
