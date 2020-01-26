@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded",() => {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
 
     const pos = new Vector2D(getRandomInt(positions.getY()), getRandomInt(positions.getY()));
     const vel = new Vector2D(getRandomInt(velocities.getY()) * negative(), getRandomInt(velocities.getY()) * negative());

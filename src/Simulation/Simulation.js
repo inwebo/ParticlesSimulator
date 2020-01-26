@@ -30,22 +30,33 @@ export default class Simulation {
     }
 
     step() {
-        // this.garbageCollector();
+        this.garbageCollector();
         this._particles.forEach((particle) => {
             if(!this._bounds.inBoundsX(particle.getPosition().getX())) {
                 particle.getVelocity().negativeX();
+                if(particle.getPosition().getX() > 600) {
+                    particle.getPosition().set(600, particle.getPosition().getY());
+                }
+                if(particle.getPosition().getX() < 0) {
+                    particle.getPosition().set(0, particle.getPosition().getY());
+                }
             }
 
             if(!this._bounds.inBoundsY(particle.getPosition().getY())) {
                 if(particle.getPosition().getY() > 600) {
                     particle.getPosition().set(particle.getPosition().getX(), 600);
                 }
-                console.log(particle.getPosition().getY());
+                if(particle.getPosition().getY() < 0) {
+                    particle.getPosition().set(particle.getPosition().getX(), 0);
+                }
+                // console.log(particle.getPosition().getY());
                 particle.getVelocity().negativeY();
             }
 
 
-            Kinematics.simpleGravity(particle);
+            Kinematics.random(particle);
+            // Kinematics.uniform(particle);
+            // Kinematics.simpleGravity(particle);
         });
     }
 }
