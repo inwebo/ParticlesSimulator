@@ -24,6 +24,13 @@ export default class Particle {
     }
 
     /**
+     * @return {Vector2D}
+     */
+    getAcceleration() {
+        return this._acceleration;
+    }
+
+    /**
      * @param {Vector2D|null} position
      * @param {Vector2D|null} velocity
      * @param {Vector2D|null} acceleration
@@ -59,10 +66,5 @@ export default class Particle {
     stop() {
         this._velocity     = this._velocity.zero();
         this._acceleration = this._acceleration.zero();
-    }
-
-    move() {
-        this._velocity.add(this._acceleration);
-        this._position.add(this._velocity);
     }
 }
