@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded",() => {
   const renderBackGround = new RenderBackGround(layer0, {alpha: false});
   const renderParticle = new RenderParticle(layer0, {alpha: false});
   const renderFps    = new RenderFps(layer0);
-  const bounds       = new Bounds(new Vector2D(), new Vector2D(600, 600));
+  const bounds       = new Bounds(new Vector2D(0, 0), new Vector2D(600, 600));
   const simulation = new Simulation(bounds);
   // endregion
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded",() => {
   // simulation._particles.push(particle);
 
   const positions = new Vector2D(0, 600);
-  const velocities = new Vector2D(-5, 5);
+  const velocities = new Vector2D(-5, 10);
 
   const negative = () => {
     return Math.round(Math.random()) * 2 - 1;
@@ -38,12 +38,12 @@ document.addEventListener("DOMContentLoaded",() => {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 10; i++) {
 
     const pos = new Vector2D(getRandomInt(positions.getY()), getRandomInt(positions.getY()));
     const vel = new Vector2D(getRandomInt(velocities.getY()) * negative(), getRandomInt(velocities.getY()) * negative());
 
-    const particle = new Particle(pos, vel);
+    const particle = new Particle(pos, vel, new Vector2D(.99,0.25));
     simulation._particles.push(particle);
   }
   // endregion
