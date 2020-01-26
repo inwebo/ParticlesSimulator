@@ -3,7 +3,6 @@ import Render2D from "./Render2D";
 export default class RenderFps extends Render2D {
 
     /**
-     * @todo
      * @param subject
      * @private
      */
