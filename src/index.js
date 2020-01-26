@@ -3,6 +3,8 @@ import Particle from "./Particle/Particle";
 import BaseRender from "./Render/BaseRender";
 import Render2D from "./Render/Render2D";
 import RenderFps from "./Render/RenderFps";
+import Kinematics from "./Kinematics/Kinematics";
+import KinematicsEnum from "./Kinematics/KinematicsEnum";
 import RenderVector from "./Render/RenderVector";
 import RenderParticle from "./Render/RenderParticle";
 import Simulation from "./Simulation/Simulation";
