@@ -30,17 +30,22 @@ export default class Simulation {
     }
 
     step() {
-        this.garbageCollector();
+        // this.garbageCollector();
         this._particles.forEach((particle) => {
             if(!this._bounds.inBoundsX(particle.getPosition().getX())) {
                 particle.getVelocity().negativeX();
             }
 
             if(!this._bounds.inBoundsY(particle.getPosition().getY())) {
+                if(particle.getPosition().getY() > 600) {
+                    particle.getPosition().set(particle.getPosition().getX(), 600);
+                }
+                console.log(particle.getPosition().getY());
                 particle.getVelocity().negativeY();
             }
 
-            Kinematics.uniformAcceleration(particle);
+
+            Kinematics.simpleGravity(particle);
         });
     }
 }
