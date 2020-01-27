@@ -1,22 +1,23 @@
 import Vector2D from "@inwebo/vector/src/Vector2D";
-import RenderVector from "../src/Render/RenderVector";
 import Fps from "../src/Fps/Fps";
-import RenderFps from "../src/Render/RenderFps";
 import Bounds from "../src/Bounds/Bounds";
 import Particle from "../src/Particle/Particle";
-import RenderParticle from "../src/Render/RenderParticle";
-import RenderBackGround from "../src/Render/RenderBackGround";
 import Simulation from "../src/Simulation/Simulation";
+
+import RendererBackground from "../src/Renderer/RendererBackground";
+import RendererFps from "../src/Renderer/RendererFps";
+import RendererVector from "../src/Renderer/RendererVector";
+import RendererParticle from "../src/Renderer/RendererParticle";
 
 document.addEventListener("DOMContentLoaded",() => {
 
   // region instances
-  const layer0       = document.getElementById('layer0');
-  const renderBackGround = new RenderBackGround(layer0, {alpha: false});
-  const renderParticle = new RenderParticle(layer0, {alpha: false});
-  const renderFps    = new RenderFps(layer0);
-  const bounds       = new Bounds(new Vector2D(0, 0), new Vector2D(600, 600));
-  const simulation = new Simulation(bounds);
+  const layer0           = document.getElementById('layer0');
+  const renderBackGround = new RendererBackground(layer0, {alpha: false});
+  const renderParticle   = new RendererParticle(layer0, {alpha: false});
+  const renderFps        = new RendererFps(layer0);
+  const bounds           = new Bounds(new Vector2D(0, 0), new Vector2D(600, 600));
+  const simulation       = new Simulation(bounds);
   // endregion
 
   // region subjects
@@ -55,11 +56,20 @@ document.addEventListener("DOMContentLoaded",() => {
       simulation._particles.forEach((particle) => {
         renderParticle.draw(particle);
       });
-      renderFps.draw(fps.get());
+      // renderFps.draw(fps.get());
 
       requestAnimationFrame(draw);
     }, 1);
   };
 
   requestAnimationFrame(draw);
+
+  const _fps = () => {
+    setTimeout(() => {
+      renderFps.draw(fps.get());
+    }, 1000);
+  };
+
+  _fps();
+
 });
