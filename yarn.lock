@@ -708,6 +708,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@inwebo/render.js@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@inwebo/render.js/-/render.js-0.0.1.tgz#85670069a1d1725b9893df5b9c039a591955c769"
+  integrity sha512-rcHaTJuct/vx9I0wQY1RMEjEnDueT6lMtM2nZPI97MPYT/MrfN1AwK2H7Hq1mFS3H3xo5MJY1oENCH+JOb9ccw==
+  dependencies:
+    lodash "^4.17.15"
+
 "@inwebo/vector@^0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@inwebo/vector/-/vector-0.0.4.tgz#8563180c20e3da3f0599d8bb5178127436d8dd96"

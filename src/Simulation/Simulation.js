@@ -53,8 +53,8 @@ export default class Simulation {
                 particle.getVelocity().negativeY();
             }
 
-
-            Kinematics.random(particle);
+            Kinematics.force(particle, new Vector2D(0, -0.1));
+            Kinematics.move(particle);
             // Kinematics.uniform(particle);
             // Kinematics.simpleGravity(particle);
         });

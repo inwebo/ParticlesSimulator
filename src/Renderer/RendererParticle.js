@@ -1,7 +1,7 @@
 import Vector2D from "@inwebo/vector/src/Vector2D";
-import RenderVector from "./RenderVector";
+import RendererVector from "./RendererVector";
 
-export default class RenderParticle extends RenderVector {
+export default class RendererParticle extends RendererVector {
 
 
     /**

@@ -1,6 +1,6 @@
-import Render2D from "./Render2D";
+import Renderer2D from '@inwebo/render.js/src/Renderer2D';
 
-export default class RenderFps extends Render2D {
+export default class RendererFps extends Renderer2D {
 
     /**
      * @param subject

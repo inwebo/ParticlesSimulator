@@ -1,16 +1,7 @@
-import Render2D from "./Render2D";
+import Renderer2D from '@inwebo/render.js/src/Renderer2D'
 import Vector2D from "@inwebo/vector/src/Vector2D";
 
-export default class RenderVector extends Render2D {
-
-    /**
-     * @todo modification Bounds
-     * @private
-     */
-    _setOrigin() {
-        // this.setOriginPosition(this._position.ORIGIN_CENTER);
-    }
-
+export default class RendererVector extends Renderer2D {
     /**
      * Must be overrided
      * @param {[Vector2D]} subject
