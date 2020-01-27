@@ -23,11 +23,32 @@ export default class Particle {
         return this._velocity;
     }
 
+
+    /**
+     * @param {Vector2D} vector
+     * @return Particle
+     */
+    setVelocity(vector)  {
+        this._velocity = vector;
+
+        return this;
+    }
+
     /**
      * @return {Vector2D}
      */
     getAcceleration() {
         return this._acceleration;
+    }
+
+    /**
+     * @param {Vector2D} vector
+     * @return Particle
+     */
+    setAcceleration(vector) {
+        this._acceleration = vector;
+
+        return this;
     }
 
     /**
@@ -43,6 +64,8 @@ export default class Particle {
         this._life         = life;
         this._birth        = (!this.isEternal()) ? performance.now() : null;
         this._death        = (!this.isEternal()) ? this._birth + life : null;
+        // @todo tune it
+        this._mass = 1;
     }
 
     /**
