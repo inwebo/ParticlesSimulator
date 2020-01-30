@@ -3,6 +3,48 @@ import Vector2DValidator from "@inwebo/vector/src/Vector2DValidator";
 export default class Bounds {
 
     /**
+     * @return {Vector2D}
+     */
+    getMin() {
+        return this._min;
+    }
+
+    /**
+     * @return {number}
+     */
+    getXMin() {
+        return this._min.getX();
+    }
+
+    /**
+     * @return {number}
+     */
+    getYMin() {
+        return this._min.getY();
+    }
+
+    /**
+     * @return {Vector2D}
+     */
+    getMax() {
+        return this._max;
+    }
+
+    /**
+     * @return {number}
+     */
+    getXMax() {
+        return this._max.getX();
+    }
+
+    /**
+     * @return {number}
+     */
+    getYMax() {
+        return this._max.getY();
+    }
+
+    /**
      * @param {Vector2D|null} min
      * @param {Vector2D|null} max
      */
