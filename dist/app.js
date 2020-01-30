@@ -8,7 +8,7 @@ import RendererBackground from "../src/Renderer/RendererBackground";
 import RendererFps from "../src/Renderer/RendererFps";
 import RendererVector from "../src/Renderer/RendererVector";
 import RendererParticle from "../src/Renderer/RendererParticle";
-
+import RendererGrid from "../src/Renderer/RendererGrid";
 document.addEventListener("DOMContentLoaded",() => {
 
   // region instances
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded",() => {
   const renderBackGround = new RendererBackground(layer0, {alpha: false});
   const renderParticle   = new RendererParticle(layer0, {alpha: false});
   const renderFps        = new RendererFps(layer0);
+  const rendererGrid     = new RendererGrid(layer0);
   const bounds           = new Bounds(new Vector2D(0, 0), new Vector2D(600, 600));
   const simulation       = new Simulation(bounds);
   // endregion
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded",() => {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 300; i++) {
 
     const pos = new Vector2D(getRandomInt(positions.getY()), getRandomInt(positions.getY()));
     const vel = new Vector2D(getRandomInt(velocities.getY()) * negative(), getRandomInt(velocities.getY()) * negative());
@@ -52,10 +53,16 @@ document.addEventListener("DOMContentLoaded",() => {
   const draw = () => {
     setTimeout(() => {
       renderBackGround.draw();
+      rendererGrid
+          .setGrid(60, 60, 0, "rgba(0,0,0, 1)")
+          .draw();
+
       simulation.step();
+
       simulation._particles.forEach((particle) => {
         renderParticle.draw(particle);
       });
+
       renderFps.draw(fps.get());
 
       requestAnimationFrame(draw);

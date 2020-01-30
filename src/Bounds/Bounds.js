@@ -1,5 +1,6 @@
 import Vector2D from "@inwebo/vector/src/Vector2D";
 import Vector2DValidator from "@inwebo/vector/src/Vector2DValidator";
+
 export default class Bounds {
 
     /**
@@ -60,7 +61,13 @@ export default class Bounds {
      * @param {boolean} _strict
      */
     within(bounds, _strict = true) {
+        if(_strict) {
 
+        }
+
+        if(!_strict) {
+
+        }
     }
 
     /**
@@ -69,7 +76,7 @@ export default class Bounds {
      * @param {boolean} _strict
      */
     without(bounds, _strict = true) {
-
+        return !this.within(bounds, _strict);
     }
 
     /**
