@@ -33,33 +33,32 @@ export default class Simulation {
         this.garbageCollector();
         this._particles.forEach((particle) => {
             if(!this._bounds.inBoundsX(particle.getPosition().getX())) {
+
+                if(particle.getPosition().getX() > this._bounds.getXMax()) {
+                    particle.getPosition().set(this._bounds.getXMax(), particle.getPosition().getY());
+                }
+                if(particle.getPosition().getX() < this._bounds.getXMin()) {
+                    particle.getPosition().set(this._bounds.getXMin(), particle.getPosition().getY());
+                }
+
                 particle.getVelocity().negativeX();
-                if(particle.getPosition().getX() > 600) {
-                    particle.getPosition().set(600, particle.getPosition().getY());
-                }
-                if(particle.getPosition().getX() < 0) {
-                    particle.getPosition().set(0, particle.getPosition().getY());
-                }
             }
 
             if(!this._bounds.inBoundsY(particle.getPosition().getY())) {
-                if(particle.getPosition().getY() > 600) {
-                    particle.getPosition().set(particle.getPosition().getX(), 600);
+
+                if(particle.getPosition().getY() > this._bounds.getXMax()) {
+                    particle.getPosition().set(particle.getPosition().getX(), this._bounds.getXMax());
                 }
-                if(particle.getPosition().getY() < 0) {
-                    particle.getPosition().set(particle.getPosition().getX(), 0);
+                if(particle.getPosition().getY() < this._bounds.getXMin()) {
+                    particle.getPosition().set(particle.getPosition().getX(), this._bounds.getXMin());
                 }
-                // console.log(particle.getPosition().getY());
+
                 particle.getVelocity().negativeY();
             }
 
             Kinematics.force(particle, new Vector2D(0, 2));
 
-            // @todo cap acceleration
-
             Kinematics.move(particle);
-            // Kinematics.uniform(particle);
-            // Kinematics.simpleGravity(particle);
         });
     }
 }
