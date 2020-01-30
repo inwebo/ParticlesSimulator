@@ -18,8 +18,8 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@inwebo/render.js": "^0.0.1",
-    "@inwebo/vector": "^0.0.4",
+    "@inwebo/render.js": "^0.0",
+    "@inwebo/vector": "^0.0",
     "lodash": "^4.17.15"
   }
 }

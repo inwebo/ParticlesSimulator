@@ -53,7 +53,10 @@ export default class Simulation {
                 particle.getVelocity().negativeY();
             }
 
-            Kinematics.force(particle, new Vector2D(0, -0.1));
+            Kinematics.force(particle, new Vector2D(0, 2));
+
+            // @todo cap acceleration
+
             Kinematics.move(particle);
             // Kinematics.uniform(particle);
             // Kinematics.simpleGravity(particle);

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded",() => {
     const pos = new Vector2D(getRandomInt(positions.getY()), getRandomInt(positions.getY()));
     const vel = new Vector2D(getRandomInt(velocities.getY()) * negative(), getRandomInt(velocities.getY()) * negative());
 
-    const particle = new Particle(pos, vel, new Vector2D(.99,0.25));
+    const particle = new Particle(pos, vel, new Vector2D(0, 0));
     simulation._particles.push(particle);
   }
   // endregion
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded",() => {
       simulation._particles.forEach((particle) => {
         renderParticle.draw(particle);
       });
-      // renderFps.draw(fps.get());
+      renderFps.draw(fps.get());
 
       requestAnimationFrame(draw);
     }, 1);
