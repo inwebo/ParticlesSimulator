@@ -21,6 +21,34 @@ document.addEventListener("DOMContentLoaded",() => {
   const simulation       = new Simulation(bounds);
   // endregion
 
+  //region helper
+
+  /**
+   * @param canvas
+   * @param evt
+   * @return {{x: number, y: number}}
+   */
+  const getMousePosition = (canvas, evt) => {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top,
+    };
+  }
+
+  layer0.addEventListener('mousemove', (evt) => {
+    const pos = getMousePosition(layer0, evt);
+    // console.log(pos.x, pos.y);
+  });
+
+
+  layer0.addEventListener('click', (evt) => {
+    const pos = getMousePosition(layer0, evt);
+    console.log(pos.x, pos.y);
+  });
+
+  // endregion
+
   // region subjects
   const fps = new Fps();
   /**
@@ -60,7 +88,7 @@ document.addEventListener("DOMContentLoaded",() => {
       simulation.step();
 
       simulation._particles.forEach((particle) => {
-        renderParticle.draw(particle);
+        // renderParticle.draw(particle);
       });
 
       renderFps.draw(fps.get());
