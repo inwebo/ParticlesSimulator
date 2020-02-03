@@ -9,6 +9,7 @@ import RendererFps from "../src/Renderer/RendererFps";
 import RendererVector from "../src/Renderer/RendererVector";
 import RendererParticle from "../src/Renderer/RendererParticle";
 import RendererGrid from "../src/Renderer/RendererGrid";
+import RendererMathVector from "../src/Renderer/RendererMathVector";
 document.addEventListener("DOMContentLoaded",() => {
 
   // region instances
@@ -19,6 +20,8 @@ document.addEventListener("DOMContentLoaded",() => {
   const rendererGrid     = new RendererGrid(layer0);
   const bounds           = new Bounds(new Vector2D(0, 0), new Vector2D(600, 600));
   const simulation       = new Simulation(bounds);
+
+  const rendererMathVector    = new RendererMathVector(layer0);
   // endregion
 
   //region helper
@@ -38,6 +41,8 @@ document.addEventListener("DOMContentLoaded",() => {
 
   layer0.addEventListener('mousemove', (evt) => {
     const pos = getMousePosition(layer0, evt);
+    v.getPosition().setX(pos.x);
+    v.getPosition().setY(pos.y);
     // console.log(pos.x, pos.y);
   });
 
@@ -78,6 +83,9 @@ document.addEventListener("DOMContentLoaded",() => {
   }
   // endregion
 
+  const origin = new Particle(new Vector2D(0, 600));
+  const v = new Particle(new Vector2D(120, 480));
+
   const draw = () => {
     setTimeout(() => {
       renderBackGround.draw();
@@ -85,11 +93,14 @@ document.addEventListener("DOMContentLoaded",() => {
           .setGrid(60, 60, 0, "rgba(0,0,0, 1)")
           .draw();
 
-      simulation.step();
+      // simulation.step();
 
-      simulation._particles.forEach((particle) => {
-        // renderParticle.draw(particle);
-      });
+      // simulation._particles.forEach((particle) => {
+      //   renderParticle.draw(particle);
+      // });
+
+      // renderParticle.draw(origin);
+      rendererMathVector.draw(v);
 
       renderFps.draw(fps.get());
 
