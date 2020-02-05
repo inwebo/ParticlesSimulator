@@ -57,6 +57,7 @@ export default class Simulation {
             }
 
             Kinematics.force(particle, new Vector2D(0, 2));
+            Kinematics.forceWithMass(particle, new Vector2D(0, 2));
 
             Kinematics.move(particle);
         });

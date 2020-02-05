@@ -52,6 +52,13 @@ export default class Particle {
     }
 
     /**
+     * @return {number}
+     */
+    getMass() {
+        return this._mass;
+    }
+
+    /**
      * @param {Vector2D|null} position
      * @param {Vector2D|null} velocity
      * @param {Vector2D|null} acceleration
@@ -64,8 +71,8 @@ export default class Particle {
         this._life         = life;
         this._birth        = (!this.isEternal()) ? performance.now() : null;
         this._death        = (!this.isEternal()) ? this._birth + life : null;
-        // @todo tune it
-        this._mass = 1;
+
+        this._mass = 10.0;
     }
 
     /**

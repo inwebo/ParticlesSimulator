@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded",() => {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  for (let i = 0; i < 300; i++) {
+  for (let i = 0; i < 100; i++) {
 
     const pos = new Vector2D(getRandomInt(positions.getY()), getRandomInt(positions.getY()));
     const vel = new Vector2D(getRandomInt(velocities.getY()) * negative(), getRandomInt(velocities.getY()) * negative());
@@ -93,17 +93,13 @@ document.addEventListener("DOMContentLoaded",() => {
           .setGrid(60, 60, 0, "rgba(0,0,0, 1)")
           .draw();
 
-      // simulation.step();
+      simulation.step();
 
-      // simulation._particles.forEach((particle) => {
-      //   renderParticle.draw(particle);
-      // });
-
-      // renderParticle.draw(origin);
-      rendererMathVector.draw(v);
+      simulation._particles.forEach((particle) => {
+        renderParticle.draw(particle);
+      });
 
       renderFps.draw(fps.get());
-
       requestAnimationFrame(draw);
     }, 1);
   };

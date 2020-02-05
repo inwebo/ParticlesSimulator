@@ -24,6 +24,41 @@ export default class Kinematics {
         particle.getAcceleration().add(vector);
     }
 
+    /**
+     * @param {Particle} particle
+     * @param {Vector2D} vector
+     */
+    static forceWithMass(particle, vector) {
+        vector.divideScalar(particle.getMass() * 0.1);
+        particle.getAcceleration().add(vector);
+    }
+
+    /**
+     * @param {Particle} particle
+     * @param {number} coefficient
+     */
+    static friction(particle, coefficient = 0.01) {
+        const friction = particle.getVelocity();
+        friction.negative();
+        friction.multiply(coefficient);
+
+        Kinematics.force(particle, friction);
+    }
+
+    /**
+     * @todo
+     */
+    static fluidResistance() {
+
+    }
+
+    /**
+     * @todo
+     */
+    static gravitational() {
+
+    }
+
     // /**
     //  * @param {RendererParticle} particle
     //  */
