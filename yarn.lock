@@ -744,9 +744,9 @@
     to-fast-properties "^2.0.0"
 
 "@inwebo/render.js@^0.0":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@inwebo/render.js/-/render.js-0.0.3.tgz#ec7005e068c0f289c70ebb5078a359397e5818e8"
-  integrity sha512-ps7zx9dP/Fl0r9HZz+27tIs02aMzmVqP+0zJxOrvs5G9kSSm4GO4HYQI7Zt8/Ex04Jw7Uc1usxvFfUg7K2DulQ==
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@inwebo/render.js/-/render.js-0.0.4.tgz#6192d90aebb9f97691dd4330e2796a9fdbb4cc83"
+  integrity sha512-QHqyRVy1op15k5USStbytHaCm9VW6pmPwsFGgTURxaTnI6OExwl7yS9WRGxFSxhttlXQ+R3RwLoj1vJm/junQw==
   dependencies:
     lodash "^4.17.15"
 
