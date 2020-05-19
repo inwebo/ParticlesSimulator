@@ -7,3 +7,15 @@ import RendererParticle from "./Renderer/RendererParticle";
 import Kinematics from "./Kinematics/Kinematics";
 import RendererVector from "./Renderer/RendererVector";
 import Simulation from "./Simulation/Simulation";
+
+export {
+    Bounds,
+    Particle,
+    RendererBackground,
+    RendererFps,
+    RendererMath,
+    RendererParticle,
+    RendererVector,
+    Kinematics,
+    Simulation
+};
