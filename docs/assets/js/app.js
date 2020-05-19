@@ -1,4 +1,4 @@
-import Vector2D from "@inwebo/vector/src/Vector2D";
+import { Vector2D } from '@inwebo/vector';
 import Fps from "../../../src/Fps/Fps";
 import Bounds from "../../../src/Bounds/Bounds";
 import Particle from "../../../src/Particle/Particle";
@@ -6,10 +6,10 @@ import Simulation from "../../../src/Simulation/Simulation";
 
 import RendererBackground from "../../../src/Renderer/RendererBackground";
 import RendererFps from "../../../src/Renderer/RendererFps";
-import RendererVector from "../../../src/Renderer/RendererVector";
 import RendererParticle from "../../../src/Renderer/RendererParticle";
 import RendererGrid from "../../../src/Renderer/RendererGrid";
 import RendererMathVector from "../../../src/Renderer/RendererMathVector";
+
 document.addEventListener("DOMContentLoaded",() => {
 
   // region instances
