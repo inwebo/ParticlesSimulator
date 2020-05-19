@@ -30,7 +30,7 @@ export default class Kinematics {
      */
     static forceWithMass(particle, vector) {
         vector.divideScalar(particle.getMass() * 0.1);
-        particle.getAcceleration().add(vector);
+        Kinematics.force(particle, vector);
     }
 
     /**
