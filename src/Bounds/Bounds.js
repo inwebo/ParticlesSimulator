@@ -1,5 +1,4 @@
-import Vector2D from "@inwebo/vector/src/Vector2D";
-import Vector2DValidator from "@inwebo/vector/src/Vector2DValidator";
+import { Vector2D, Vector2DValidator } from "@inwebo/vector";
 
 export default class Bounds {
 
@@ -46,12 +45,12 @@ export default class Bounds {
     }
 
     /**
-     * @param {Vector2D|null} min
-     * @param {Vector2D|null} max
+     * @param {Vector2D} min
+     * @param {Vector2D} max
      */
     constructor(min= null, max = null) {
-        this._min = min || new Vector2D();
-        this._max = max || new Vector2D();
+        this._min = min;
+        this._max = max;
     }
 
     /**
