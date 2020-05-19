@@ -1,5 +1,5 @@
-import Renderer2D from '@inwebo/render.js/src/Renderer2D'
-import Vector2D from "@inwebo/vector/src/Vector2D";
+import { Renderer2D } from '@inwebo/render.js';
+import { Vector2D } from "@inwebo/vector";
 
 export default class RendererMathVector extends Renderer2D {
     /**
