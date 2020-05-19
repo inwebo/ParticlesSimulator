@@ -1,4 +1,4 @@
-import Vector2D from '@inwebo/vector/src/Vector2D';
+import { Vector2D } from '@inwebo/vector';
 import Particle from "../Particle/Particle";
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));

@@ -1,4 +1,4 @@
-import Vector2D from "@inwebo/vector/src/Vector2D";
+import { Vector2D } from "@inwebo/vector";
 
 export default class Particle {
 
