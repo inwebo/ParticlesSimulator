@@ -2,6 +2,7 @@ import { Vector2D, Vector2DValidator } from "@inwebo/vector";
 
 export default class Bounds {
 
+    // region getters/setters
     /**
      * @return {Vector2D}
      */
@@ -43,12 +44,16 @@ export default class Bounds {
     getYMax() {
         return this._max.getY();
     }
+    // endregion getters/setters
 
     /**
      * @param {Vector2D} min
      * @param {Vector2D} max
      */
     constructor(min= null, max = null) {
+        Vector2DValidator.validate(min);
+        Vector2DValidator.validate(max);
+
         this._min = min;
         this._max = max;
     }
@@ -57,14 +62,14 @@ export default class Bounds {
      * Are bounds in this
      *
      * @param {Bounds} bounds
-     * @param {boolean} _strict
+     * @param {boolean} strict
      */
-    within(bounds, _strict = true) {
-        if(_strict) {
+    within(bounds, strict = true) {
+        if(strict) {
 
         }
 
-        if(!_strict) {
+        if(!strict) {
 
         }
     }
@@ -79,20 +84,20 @@ export default class Bounds {
     }
 
     /**
-     * @param {number} number
+     * @param {Vector2D} vector
      * @return {boolean}
      * @private
      */
-    _inBoundsX(number) {
+    _inBoundsX(vector) {
         return number <= this._max.getX() && number >= this._min.getX();
     }
 
     /**
-     * @param {number} number
+     * @param {Vector2D} vector
      * @return {boolean}
      * @private
      */
-    _inBoundsXStrict(number) {
+    _inBoundsXStrict(vector) {
         return number < this._max.getX() && number > this._min.getX();
     }
 
@@ -102,6 +107,8 @@ export default class Bounds {
      * @return {boolean}
      */
     inBoundsX(number, _strict = true) {
+        const vector = new Vector2D(number, 0);
+
         return (_strict) ? this._inBoundsXStrict(number) : this._inBoundsX(number);
     }
 
@@ -130,6 +137,8 @@ export default class Bounds {
      * @return {boolean}
      */
     inBoundsY(number, _strict = true) {
+        const vector = new Vector2D(0, number);
+
         return (_strict) ? this._inBoundsYStrict(number) : this._inBoundsY(number);
     }
 
