@@ -59,59 +59,35 @@ export default class Bounds {
     }
 
     /**
-     * Are bounds in this
-     *
-     * @param {Bounds} bounds
-     * @param {boolean} strict
-     */
-    within(bounds, strict = true) {
-        if(strict) {
-
-        }
-
-        if(!strict) {
-
-        }
-    }
-
-    /**
-     * Are bounds outside this
-     * @param {Bounds} bounds
-     * @param {boolean} _strict
-     */
-    without(bounds, _strict = true) {
-        return !this.within(bounds, _strict);
-    }
-
-    /**
-     * @param {Vector2D} vector
+     * @param {number} number
      * @return {boolean}
      * @private
      */
-    _inBoundsX(vector) {
-        return number <= this._max.getX() && number >= this._min.getX();
-    }
+    _inBoundsX(number) {
+        const v = new Vector2D(number)
 
-    /**
-     * @param {Vector2D} vector
-     * @return {boolean}
-     * @private
-     */
-    _inBoundsXStrict(vector) {
-        return number < this._max.getX() && number > this._min.getX();
+        return v.xge(this._min) && v.xle(this._max);
     }
 
     /**
      * @param {number} number
-     * @param {boolean} _strict
      * @return {boolean}
+     * @private
      */
-    inBoundsX(number, _strict = true) {
-        const vector = new Vector2D(number, 0);
+    _inBoundsXStrict(number) {
+        const v = new Vector2D(number)
 
-        return (_strict) ? this._inBoundsXStrict(number) : this._inBoundsX(number);
+        return v.xgt(this._min) && v.xlt(this._max);
     }
 
+    /**
+     * @param {number} number
+     * @param {boolean} strict
+     * @return {boolean}
+     */
+    inBoundsX(number, strict = true) {
+        return (strict) ? this._inBoundsXStrict(number) : this._inBoundsX(number);
+    }
 
     /**
      * @param {number} number
@@ -119,7 +95,9 @@ export default class Bounds {
      * @private
      */
     _inBoundsY(number) {
-        return number <= this._max.getY() && number >= this._min.getY();
+        const v = new Vector2D(0,number);
+
+        return v.yge(this._max) && v.yle(this._max);
     }
 
     /**
@@ -128,18 +106,18 @@ export default class Bounds {
      * @private
      */
     _inBoundsYStrict(number) {
-        return number < this._max.getY() && number > this._min.getY();
+        const v = new Vector2D(0,number);
+
+        return v.ygt(this._max) && v.ylt(this._max);
     }
 
     /**
      * @param {number} number
-     * @param {boolean} _strict
+     * @param {boolean} strict
      * @return {boolean}
      */
-    inBoundsY(number, _strict = true) {
-        const vector = new Vector2D(0, number);
-
-        return (_strict) ? this._inBoundsYStrict(number) : this._inBoundsY(number);
+    inBoundsY(number, strict = true) {
+        return (strict) ? this._inBoundsYStrict(number) : this._inBoundsY(number);
     }
 
     /**
@@ -164,11 +142,11 @@ export default class Bounds {
 
     /**
      * @param {Vector2D} vector
-     * @param {boolean} _strict
+     * @param {boolean} strict
      * @returns {boolean}
      */
-    inBounds(vector, _strict = true) {
+    inBounds(vector, strict = true) {
         Vector2DValidator.validate(vector);
-        return (_strict) ? this._inBoundsStrict(vector) : this._inBounds(vector);
+        return (strict) ? this._inBoundsStrict(vector) : this._inBounds(vector);
     }
 }
