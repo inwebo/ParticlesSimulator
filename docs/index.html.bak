@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started</title>
+    <script type="application/javascript" src="../dist/main.min.js"></script>
+    <script type="application/javascript" src="assets/js/demo.min.js"></script>
+    <style>
+        canvas {
+            border-color: black;
+            border-style: solid;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="index.html">index.js</a></li>
+    </ul>
+</nav>
+
+<div>
+    <canvas id="layer0" width="600" height="600" class="grid"></canvas>
+</div>
+<!--<div>-->
+<!--    <canvas id="layer1" width="600" height="600"></canvas>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <canvas id="layer2" width="600" height="600"></canvas>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <canvas id="layer3" width="600" height="600"></canvas>-->
+<!--</div>-->
+</body>
+</html>
