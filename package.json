@@ -20,6 +20,6 @@
   "dependencies": {
     "@inwebo/render.js": "^0.0",
     "@inwebo/vector": "^0.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.19"
   }
 }
