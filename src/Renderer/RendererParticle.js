@@ -1,4 +1,4 @@
-import { Vector2D } from "@inwebo/vector";
+import Vector2D from "@inwebo/vector/src/Vector2D";
 import RendererVector from "./RendererVector";
 
 export default class RendererParticle extends RendererVector {

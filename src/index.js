@@ -8,14 +8,14 @@ import Kinematics from "./Kinematics/Kinematics";
 import RendererVector from "./Renderer/RendererVector";
 import Simulation from "./Simulation/Simulation";
 
-export {
+export default {
     Bounds,
     Particle,
     RendererBackground,
     RendererFps,
     RendererMath,
     RendererParticle,
-    RendererVector,
     Kinematics,
+    RendererVector,
     Simulation
-};
+}

@@ -1,16 +1,7 @@
-import { Vector2D } from '@inwebo/vector';
+import Vector2D from '@inwebo/vector/src/Vector2D';
 import Kinematics from "../Kinematics/Kinematics";
 
 export default class Simulation {
-
-    getSubjects() {
-        return this._particles;
-    }
-
-    pushSubject(subject) {
-        this._particles.push(subject);
-    }
-
     constructor(bounds) {
         this._bounds    = bounds;
         this._particles = [];

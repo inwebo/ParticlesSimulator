@@ -1,4 +1,4 @@
-import { Renderer2D } from '@inwebo/render.js';
+import Renderer2D from '@inwebo/render.js/src/Renderer2D';
 
 export default class RendererGrid extends Renderer2D {
 

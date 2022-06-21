@@ -1,4 +1,4 @@
-import { Vector2D } from '@inwebo/vector';
+import Vector2D from "@inwebo/vector/src/Vector2D";
 
 export default class Attractor {
     /**
