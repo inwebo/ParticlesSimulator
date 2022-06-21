@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpack5_boilerplate=self.webpackChunkwebpack5_boilerplate||[]).push([[179],{880:()=>{console.log("docs/index.js")}},e=>{e(e.s=880)}]);
